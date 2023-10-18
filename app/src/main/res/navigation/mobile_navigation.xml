@@ -10,16 +10,15 @@
         android:name="ninh.main.mybarcodescanner.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
-
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="ninh.main.mybarcodescanner.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
-
+        android:id="@+id/nav_list"
+        android:name="ninh.main.mybarcodescanner.list.ItemFragment"
+        android:label="@string/menu_list"
+        tools:layout="@layout/fragment_list_list"/>
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="ninh.main.mybarcodescanner.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_bin"
+        android:name="ninh.main.mybarcodescanner.bin.ItemFragment"
+        android:label="@string/menu_bin"
+        tools:layout="@layout/fragment_bin_list"/>
+
 </navigation>

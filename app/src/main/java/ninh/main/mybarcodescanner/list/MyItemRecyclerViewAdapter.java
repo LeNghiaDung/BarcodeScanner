@@ -50,8 +50,8 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 
         public ViewHolder(FragmentListBinding binding) {
             super(binding.getRoot());
-            mIdView = binding.itemNumber;
-            mContentView = binding.content;
+            mIdView = binding.tvSeri;
+            mContentView = binding.tvNameProduct;
         }
 
         @Override
