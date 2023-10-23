@@ -12,9 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyBarcodeScanner"
         tools:targetApi="31">
+        <activity
+            android:name=".bottom_dialog"
+            android:exported="false" />
+
         <meta-data
             android:name="com.google.mlkit.vision.DEPENDENCIES"
-            android:value="barcode"/>
+            android:value="barcode" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
