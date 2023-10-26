@@ -19,9 +19,9 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:layout_margin="5dp"
-        android:layout_weight="10">
+        android:layout_weight="10"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tvSeriBin"
@@ -44,12 +44,12 @@
     </LinearLayout>
 
     <ImageButton
-        android:id="@+id/imageButton5"
+        android:id="@+id/imageButton4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="@color/white"
-        android:contentDescription="deleterfrv"
+        android:background="@color/transparent"
+        android:contentDescription="deletefrv"
         android:onClick="clickDelete"
         android:src="@drawable/deletefoever"
         tools:ignore="TouchTargetSizeCheck" />
