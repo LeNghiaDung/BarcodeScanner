@@ -105,7 +105,6 @@ public class HomeFragment extends Fragment {
     }
 
     private void bindpreview(ProcessCameraProvider processCameraProvider) {
-
         Preview preview = new Preview.Builder().build();
         CameraSelector cameraSelector = new CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_BACK).build();
         preview.setSurfaceProvider(previewView.getSurfaceProvider());
