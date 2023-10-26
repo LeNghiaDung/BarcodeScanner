@@ -17,4 +17,6 @@
             android:icon="@drawable/delete"
             android:title="@string/menu_bin" />
     </group>
+
+
 </menu>

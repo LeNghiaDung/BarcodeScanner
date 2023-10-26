@@ -2,23 +2,17 @@ package ninh.main.mybarcodescanner.ui.home;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.media.AudioManager;
 import android.media.Image;
-import android.media.ToneGenerator;
 import android.os.Bundle;
 import android.util.Size;
 import android.view.LayoutInflater;
-import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.OptIn;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ExperimentalGetImage;
@@ -32,7 +26,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -50,9 +43,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import ninh.main.mybarcodescanner.MainActivity;
 import ninh.main.mybarcodescanner.R;
-import ninh.main.mybarcodescanner.bottom_dialog;
 import ninh.main.mybarcodescanner.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
@@ -64,6 +55,7 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
