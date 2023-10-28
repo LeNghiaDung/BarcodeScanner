@@ -1,6 +1,7 @@
 package ninh.main.mybarcodescanner.ui.home;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.graphics.Rect;
@@ -8,6 +9,8 @@ import android.media.Image;
 import android.os.Bundle;
 import android.util.Size;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -43,6 +46,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import ninh.main.mybarcodescanner.AddProduct;
 import ninh.main.mybarcodescanner.R;
 import ninh.main.mybarcodescanner.databinding.FragmentHomeBinding;
 
@@ -55,6 +59,7 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
 
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
@@ -171,6 +176,9 @@ public class HomeFragment extends Fragment {
 
                 String check = barcode.getRawValue().toString();
                 Toast.makeText(getActivity(), check, Toast.LENGTH_SHORT).show();
+                Intent productIntent = new Intent(getActivity(), AddProduct.class);
+                productIntent.putExtra("seri",check);
+                startActivity(productIntent);
             }
         }
     }
