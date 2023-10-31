@@ -5,12 +5,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.media.AudioManager;
 import android.media.Image;
+import android.media.ToneGenerator;
 import android.os.Bundle;
 import android.util.Size;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -41,6 +41,7 @@ import com.google.mlkit.vision.barcode.BarcodeScanning;
 import com.google.mlkit.vision.barcode.common.Barcode;
 import com.google.mlkit.vision.common.InputImage;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -56,6 +57,7 @@ public class HomeFragment extends Fragment {
     private PreviewView previewView;
     private ImageAnalyzer analyzer;
     private FragmentHomeBinding binding;
+    boolean barcodeDetected = false;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -148,9 +150,19 @@ public class HomeFragment extends Fragment {
                     .addOnSuccessListener(new OnSuccessListener<List<Barcode>>() {
                         @Override
                         public void onSuccess(List<Barcode> barcodes) {
-                            readerBarcodeData(barcodes);
-                            // Task completed successfully
-                            // ...
+
+                            if (!barcodeDetected && barcodes.size() > 0) {
+                                // Handle the first detected barcode
+                                Barcode firstBarcode = barcodes.get(0);
+
+                                // Set the flag to true to stop further scanning
+                                barcodeDetected = true;
+
+                                ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
+                                toneGen1.startTone(ToneGenerator.TONE_CDMA_PIP,150);
+                                readerBarcodeData(Collections.singletonList(firstBarcode),scanner);
+
+                            }
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -167,21 +179,22 @@ public class HomeFragment extends Fragment {
                     });
         }
 
-        private void readerBarcodeData(List<Barcode> barcodes) {
+        private void readerBarcodeData(List<Barcode> barcodes, BarcodeScanner scanner) {
             for (Barcode barcode : barcodes) {
+                String checkSeri = null;
                 Rect bounds = barcode.getBoundingBox();
                 Point[] corners = barcode.getCornerPoints();
 
                 String rawValue = barcode.getRawValue();
 
                 String check = barcode.getRawValue().toString();
-                Toast.makeText(getActivity(), check, Toast.LENGTH_SHORT).show();
+
                 Intent productIntent = new Intent(getActivity(), AddProduct.class);
                 productIntent.putExtra("seri",check);
                 startActivity(productIntent);
+                }
             }
         }
-    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
