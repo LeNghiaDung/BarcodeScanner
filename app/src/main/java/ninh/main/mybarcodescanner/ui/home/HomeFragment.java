@@ -202,6 +202,7 @@ public class HomeFragment extends Fragment {
 
                 long check = Long.parseLong(barcode.getRawValue());
 
+
                 if (dbManager.checkExisted(check)){
                     Intent productIntent = new Intent(getActivity(), ModifyProductActivity.class);
                     productIntent.putExtra("seri",check);

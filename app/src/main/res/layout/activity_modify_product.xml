@@ -54,7 +54,7 @@
                 android:layout_margin="10dp"
                 android:orientation="vertical">
 
-                <TextView
+                <EditText
                     android:id="@+id/nameProduct_edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

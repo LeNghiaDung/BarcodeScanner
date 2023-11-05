@@ -44,6 +44,8 @@ public class ModifyProductActivity extends Activity implements OnClickListener{
 
         Intent intent = getIntent();
         Long seri = Long.valueOf(intent.getStringExtra("seri"));
+
+
         String nameProduct = intent.getStringExtra("nameProduct");
         Integer quantity = Integer.valueOf(intent.getStringExtra("quantity"));
 

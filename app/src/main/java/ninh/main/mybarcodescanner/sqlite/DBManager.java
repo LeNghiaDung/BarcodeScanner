@@ -17,23 +17,21 @@ public class DBManager {
     private SQLiteDatabase database;
 
     public DBManager(Context c) {
-
         context = c;
     }
 
     public DBManager open() throws SQLException {
-        dbHelper = new DatabaseHelper(context);
-        database = dbHelper.getWritableDatabase();
+        dbHelper = new DatabaseHelper(context); //KHOI TAO DATABASE
+        database = dbHelper.getWritableDatabase(); // BAT CHE DO GHI DATABASE
         return this;
     }
 
     public void close() {
-
         dbHelper.close();
     }
 
     public void insert( Long seri , String name, Integer quantity) {
-        ContentValues contentValue = new ContentValues();
+        ContentValues contentValue = new ContentValues(); //KHOI TAO
         contentValue.put(DatabaseHelper.Seri, seri);
         contentValue.put(DatabaseHelper.NameProduct, name);
         contentValue.put(DatabaseHelper.Quantity, quantity);
@@ -41,7 +39,9 @@ public class DBManager {
     }
 
     public Cursor fetch() {
+        // Luu columns
         String[] columns = new String[] { DatabaseHelper.Seri, DatabaseHelper.NameProduct, DatabaseHelper.Quantity };
+
         Cursor cursor = database.query(DatabaseHelper.TABLE_NAME, columns, null, null, null, null, null);
         if (cursor != null) {
             cursor.moveToFirst();
@@ -69,5 +69,4 @@ public class DBManager {
         }
         return false;
     }
-
 }

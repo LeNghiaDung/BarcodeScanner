@@ -46,7 +46,7 @@ public class AddProductActivity extends Activity implements OnClickListener {
                 final String name = nameProductTextView.getText().toString();
                 final int quantity = Integer.parseInt(quantityEditText.getText().toString());
 
-                dbManager.insert(seri , name, quantity);
+                dbManager.insert(seri, name, quantity);
 
                 Intent main = new Intent(AddProductActivity.this, ProductListActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
