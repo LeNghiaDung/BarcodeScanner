@@ -50,9 +50,13 @@ public class AddProductActivity extends Activity implements OnClickListener {
 
                 Intent main = new Intent(AddProductActivity.this, ProductListActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
                 startActivity(main);
                 break;
         }
+    }
+    public void returnHome() {
+        Intent home_intent = new Intent(this, ProductListActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(home_intent);
     }
 }

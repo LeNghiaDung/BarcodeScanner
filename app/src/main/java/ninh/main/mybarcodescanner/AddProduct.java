@@ -11,12 +11,15 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import ninh.main.mybarcodescanner.ui.home.HomeFragment;
+
 public class AddProduct extends AppCompatActivity {
     ImageView productImage;
     TextView productName, productSeri, productDetail;
     Button addStorage;
     ImageButton remove,add;
     EditText productQuantity;
+    Intent intent;
 
     int quantity = 0;
     @Override
@@ -24,9 +27,10 @@ public class AddProduct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
         init();
-        Intent intent = getIntent();
+        intent = getIntent();
         String seri = intent.getStringExtra("seri");
         productSeri.setText(seri);
+
     }
 
     private void init(){

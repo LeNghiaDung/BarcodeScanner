@@ -1,6 +1,7 @@
 package ninh.main.mybarcodescanner.ui.home;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Point;
@@ -29,6 +30,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -50,6 +52,9 @@ import java.util.concurrent.Executors;
 import ninh.main.mybarcodescanner.AddProduct;
 import ninh.main.mybarcodescanner.R;
 import ninh.main.mybarcodescanner.databinding.FragmentHomeBinding;
+import ninh.main.mybarcodescanner.sqlite.DBManager;
+import ninh.main.mybarcodescanner.sqlite.ModifyProductActivity;
+import ninh.main.mybarcodescanner.sqlite.ProductListActivity;
 
 public class HomeFragment extends Fragment {
     private ListenableFuture cameraProviderFuture;
@@ -58,14 +63,16 @@ public class HomeFragment extends Fragment {
     private ImageAnalyzer analyzer;
     private FragmentHomeBinding binding;
     boolean barcodeDetected = false;
-
+    private DBManager dbManager;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-
-
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        dbManager = new DBManager(getActivity());
+        dbManager.open();
+
         previewView = root.findViewById(R.id.previewView);
         this.getActivity().getWindow().setFlags(1024,1024);
 
@@ -135,17 +142,22 @@ public class HomeFragment extends Fragment {
             scanbarcode(image);
         }
 
-        // MAIN - SCANNER
+
+//         MAIN - SCANNER
         @OptIn(markerClass = ExperimentalGetImage.class)
         private void scanbarcode(ImageProxy image) {
+            //Lay anh
             Image image1 = image.getImage();
             assert image1 != null;
             InputImage inputImage = InputImage.fromMediaImage(image1, image.getImageInfo().getRotationDegrees());
+            //Filter: Loc anh co Barcode
             BarcodeScannerOptions options =
                     new BarcodeScannerOptions.Builder()
                             .setBarcodeFormats(
                                     Barcode.FORMAT_ALL_FORMATS).build();
             BarcodeScanner scanner = BarcodeScanning.getClient(options);
+
+            //Cho barcode vao List
             Task<List<Barcode>> result = scanner.process(inputImage)
                     .addOnSuccessListener(new OnSuccessListener<List<Barcode>>() {
                         @Override
@@ -156,12 +168,14 @@ public class HomeFragment extends Fragment {
                                 Barcode firstBarcode = barcodes.get(0);
 
                                 // Set the flag to true to stop further scanning
+                                //LOI HIEN TAI DO CAI DUOI
                                 barcodeDetected = true;
 
+                                // Tao am thanh TITttttt
                                 ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
                                 toneGen1.startTone(ToneGenerator.TONE_CDMA_PIP,150);
-                                readerBarcodeData(Collections.singletonList(firstBarcode),scanner);
 
+                                readerBarcodeData(Collections.singletonList(firstBarcode),scanner);
                             }
                         }
                     })
@@ -183,18 +197,24 @@ public class HomeFragment extends Fragment {
             for (Barcode barcode : barcodes) {
                 String checkSeri = null;
                 Rect bounds = barcode.getBoundingBox();
-                Point[] corners = barcode.getCornerPoints();
 
                 String rawValue = barcode.getRawValue();
 
-                String check = barcode.getRawValue().toString();
+                long check = Long.parseLong(barcode.getRawValue());
 
-                Intent productIntent = new Intent(getActivity(), AddProduct.class);
-                productIntent.putExtra("seri",check);
-                startActivity(productIntent);
+                if (dbManager.checkExisted(check)){
+                    Intent productIntent = new Intent(getActivity(), ModifyProductActivity.class);
+                    productIntent.putExtra("seri",check);
+                    startActivity(productIntent);
+                } else {
+                    Intent productIntent = new Intent(getActivity(), AddProduct.class);
+                    productIntent.putExtra("seri",check);
+                    startActivity(productIntent);
                 }
             }
         }
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

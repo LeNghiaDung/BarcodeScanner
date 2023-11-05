@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddProduct"
-    android:orientation="vertical"
-    android:weightSum="10">
+    android:padding="10dp">
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -57,31 +56,31 @@
                 android:layout_margin="10dp"
                 android:orientation="vertical">
 
-                <TextView
+                <EditText
                     android:id="@+id/productTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:text="Product Name"
-                    android:textSize="30dp"
+                    android:textSize="25dp"
                     android:textStyle="bold" />
 
-                <TextView
+                <EditText
                     android:id="@+id/productSeri"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:text="Product Name"
-                    android:textSize="25dp"
+                    android:text="Product Seri"
+                    android:textSize="20dp"
                     android:textStyle="italic" />
 
-                <TextView
+                <EditText
                     android:id="@+id/productDetail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:text="Product Detail"
-                    android:textSize="20dp" />
+                    android:textSize="15dp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

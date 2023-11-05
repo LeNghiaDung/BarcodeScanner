@@ -2,9 +2,12 @@ package ninh.main.mybarcodescanner.sqlite;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
+
 public class DBManager {
 
     private DatabaseHelper dbHelper;
@@ -57,4 +60,14 @@ public class DBManager {
     public void delete(Long _seri) {
         database.delete(DatabaseHelper.TABLE_NAME, DatabaseHelper.Seri + "=" + _seri, null);
     }
+
+    public boolean checkExisted(Long seri){
+        Cursor cursor = fetch();
+        long seriProduct = cursor.getInt(0);
+        if (seriProduct == seri){
+            return true;
+        }
+        return false;
+    }
+
 }
