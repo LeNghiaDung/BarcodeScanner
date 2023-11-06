@@ -58,16 +58,19 @@ public class DBManager {
         return i;
     }
 
-    public void delete(Long _seri) {
+    public void delete(String _seri) {
         database.delete(DatabaseHelper.TABLE_NAME, DatabaseHelper.Seri + "=" + _seri, null);
     }
 
     public boolean checkExisted(String seri){
-        Cursor data = dbHelper.getData("SELECT * FROM " + DatabaseHelper.TABLE_NAME + " WHERE " + DatabaseHelper.Seri + " LIKE " + seri);;
-        if (data == null){
-            return false;
+        Cursor data = dbHelper.getData("SELECT * FROM " + DatabaseHelper.TABLE_NAME + " WHERE " + DatabaseHelper.Seri + " LIKE " + seri);
+        while(data.moveToNext()){
+            String seriProduct = data.getString(0);
+            if (seri == seriProduct){
+                return true;
+            }
         }
-        return true;
+        return false;
     }
 
 }
