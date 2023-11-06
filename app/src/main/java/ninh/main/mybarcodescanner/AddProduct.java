@@ -14,8 +14,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import ninh.main.mybarcodescanner.sqlite.AddProductActivity;
 import ninh.main.mybarcodescanner.sqlite.DBManager;
 import ninh.main.mybarcodescanner.sqlite.DatabaseHelper;
+import ninh.main.mybarcodescanner.sqlite.ProductListActivity;
 import ninh.main.mybarcodescanner.ui.home.HomeFragment;
 
 public class AddProduct extends AppCompatActivity {
@@ -52,15 +54,6 @@ public class AddProduct extends AppCompatActivity {
         add = findViewById(R.id.btnIncrease);
         productQuantity = findViewById(R.id.productQuantity);
     }
-    public void getData(){
-        Cursor data = databaseHelper.getData("SELECT * FROM "+ DatabaseHelper.TABLE_NAME + " WHERE " + DatabaseHelper.Seri +" LIKE "+ seri);
-
-        quantity = data.getInt(2);
-
-        productSeri.setText(data.getInt(0));
-        productName.setText(data.getString(1));
-        productQuantity.setText(data.getInt(2));
-    }
     public void removeQuantity(View view) {
         if (quantity == 0){
             remove.setEnabled(false);
@@ -86,6 +79,16 @@ public class AddProduct extends AppCompatActivity {
         int quantity = productQuantity.getText().length();
         if (dbManager.insert(seri, name, quantity) == 1){
             Toast.makeText(this, "ADD SUCCESSFULLY", Toast.LENGTH_SHORT).show();
+            Intent main = new Intent(this, ProductListActivity.class)
+                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(main);
         }
+//        this.returnHome();
+    }
+
+    public void returnHome() {
+        Intent home_intent = new Intent(getApplicationContext(), ProductListActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(home_intent);
     }
 }

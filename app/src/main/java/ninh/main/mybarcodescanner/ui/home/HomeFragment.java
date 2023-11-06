@@ -202,19 +202,15 @@ public class HomeFragment extends Fragment {
                 String rawValue = barcode.getRawValue();
 
                 String check = barcode.getRawValue();
-
-                Intent productIntent = new Intent(getActivity(), AddProduct.class);
-                productIntent.putExtra("seri",check);
-                startActivity(productIntent);
-//                if (dbManager.checkExisted(check)){
-//                    Intent productIntent = new Intent(getActivity(), ModifyProductActivity.class);
-//                    productIntent.putExtra("seri",check);
-//                    startActivity(productIntent);
-//                } else {
-//                    Intent productIntent = new Intent(getActivity(), AddProduct.class);
-//                    productIntent.putExtra("seri",check);
-//                    startActivity(productIntent);
-//                }
+                if (dbManager.checkExisted(check)){
+                    Intent productIntent = new Intent(getActivity(), ModifyProductActivity.class);
+                    productIntent.putExtra(DatabaseHelper.Seri,check);
+                    startActivity(productIntent);
+                } else {
+                    Intent productIntent = new Intent(getActivity(), AddProduct.class);
+                    productIntent.putExtra(DatabaseHelper.Seri,check);
+                    startActivity(productIntent);
+                }
             }
         }
     }

@@ -16,7 +16,6 @@ public class AddProductActivity extends Activity implements OnClickListener {
     private TextView seriTextView;
     private TextView nameProductTextView;
     private EditText quantityEditText;
-
     private DBManager dbManager;
 
     @Override
@@ -29,7 +28,6 @@ public class AddProductActivity extends Activity implements OnClickListener {
         seriTextView = (TextView) findViewById(R.id.productSeri);
         nameProductTextView = (TextView) findViewById(R.id.productTitle);
         quantityEditText = (EditText) findViewById(R.id.productQuantity);
-
         addTodoBtn = (Button) findViewById(R.id.btnAdd);
 
         dbManager = new DBManager(this);

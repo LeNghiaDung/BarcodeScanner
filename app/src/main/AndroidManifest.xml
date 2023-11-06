@@ -42,6 +42,8 @@
 
         <activity android:name=".sqlite.ModifyProductActivity"
             android:exported="false"/>
+        <activity android:name=".sqlite.ProductListActivity"
+            android:exported="false"/>
     </application>
 
 </manifest>

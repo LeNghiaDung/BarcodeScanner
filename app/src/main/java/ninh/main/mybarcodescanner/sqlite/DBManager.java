@@ -63,14 +63,11 @@ public class DBManager {
     }
 
     public boolean checkExisted(String seri){
-        Cursor cursor = dbHelper.getData("SELECT * FROM " + DatabaseHelper.TABLE_NAME);
-        while(cursor.moveToNext()){
-            String seriProduct = cursor.getString(0);
-            if (seri == seriProduct){
-                return true;
-            }
+        Cursor data = dbHelper.getData("SELECT * FROM " + DatabaseHelper.TABLE_NAME + " WHERE " + DatabaseHelper.Seri + " LIKE " + seri);;
+        if (data == null){
+            return false;
         }
-        return false;
+        return true;
     }
 
 }
