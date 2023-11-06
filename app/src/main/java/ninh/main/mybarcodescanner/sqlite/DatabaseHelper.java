@@ -44,4 +44,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
+
+    public Cursor getData(String sql){
+        SQLiteDatabase database = getReadableDatabase();
+        return database.rawQuery(sql,null);
+    }
 }

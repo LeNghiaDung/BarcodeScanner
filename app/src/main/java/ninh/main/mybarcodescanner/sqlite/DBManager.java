@@ -63,10 +63,13 @@ public class DBManager {
 
     public boolean checkExisted(Long seri){
         Cursor cursor = fetch();
-        long seriProduct = cursor.getInt(0);
-        if (seriProduct == seri){
-            return true;
+        while(cursor.moveToNext()){
+            long seriProduct = cursor.getInt(0);
+            if (seriProduct == seri){
+                return true;
+            }
         }
         return false;
     }
+
 }

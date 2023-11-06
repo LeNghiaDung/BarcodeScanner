@@ -2,6 +2,7 @@ package ninh.main.mybarcodescanner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import ninh.main.mybarcodescanner.sqlite.DBManager;
+import ninh.main.mybarcodescanner.sqlite.DatabaseHelper;
 import ninh.main.mybarcodescanner.ui.home.HomeFragment;
 
 public class AddProduct extends AppCompatActivity {
@@ -20,6 +23,8 @@ public class AddProduct extends AppCompatActivity {
     ImageButton remove,add;
     EditText productQuantity;
     Intent intent;
+    DBManager dbManager;
+    DatabaseHelper databaseHelper;
 
     int quantity = 0;
     @Override
@@ -28,8 +33,8 @@ public class AddProduct extends AppCompatActivity {
         setContentView(R.layout.activity_add_product);
         init();
         intent = getIntent();
-        String seri = intent.getStringExtra("seri");
-        productSeri.setText(seri);
+        Long seri = Long.valueOf(intent.getStringExtra("seri"));
+        productSeri.setText(seri + " ");
 
     }
 
@@ -61,5 +66,10 @@ public class AddProduct extends AppCompatActivity {
 
     public void returnScan(View view) {
         finish();
+    }
+
+    public void addToDatabase(View view) {
+        ContentValues values = new ContentValues();
+        values.put(databaseHelper.seri,);
     }
 }

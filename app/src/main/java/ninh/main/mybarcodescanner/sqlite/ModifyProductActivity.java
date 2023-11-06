@@ -3,6 +3,7 @@ package ninh.main.mybarcodescanner.sqlite;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,6 +25,8 @@ public class ModifyProductActivity extends Activity implements OnClickListener{
     private int _quantity;
 
     private DBManager dbManager;
+    private DatabaseHelper database;
+    Long seri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,18 +46,23 @@ public class ModifyProductActivity extends Activity implements OnClickListener{
 //        deleteBtn = (Button) findViewById(R.id.btn_delete);
 
         Intent intent = getIntent();
-        Long seri = Long.valueOf(intent.getStringExtra("seri"));
+        seri = Long.valueOf(intent.getStringExtra("seri"));
 
-
-        String nameProduct = intent.getStringExtra("nameProduct");
-        Integer quantity = Integer.valueOf(intent.getStringExtra("quantity"));
-
+//        String nameProduct = intent.getStringExtra("nameProduct");
+//        Integer quantity = Integer.valueOf(intent.getStringExtra("quantity"));
 //        _seri = Long.parseLong(String.valueOf(seri));
 //        nameProductText.setText(nameProduct);
-        _quantity = Integer.parseInt(String.valueOf(quantity));
+//        _quantity = Integer.parseInt(String.valueOf(quantity));
 
         saveBtn.setOnClickListener(this);
 //        deleteBtn.setOnClickListener(this);
+    }
+
+    public void getData(){
+        Cursor data = database.getData("SELECT * FROM "+ DatabaseHelper.TABLE_NAME + " WHERE " + DatabaseHelper.Seri +" LIKE "+_seri);
+        nameProductText.setText(data.getString(1));
+        seriText.setText(data.getInt(0));
+        quantityText.setText(data.getString(2));
     }
 
     @Override
