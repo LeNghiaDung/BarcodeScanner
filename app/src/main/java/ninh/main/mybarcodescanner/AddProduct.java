@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import ninh.main.mybarcodescanner.sqlite.DBManager;
 import ninh.main.mybarcodescanner.sqlite.DatabaseHelper;
@@ -18,7 +19,8 @@ import ninh.main.mybarcodescanner.ui.home.HomeFragment;
 
 public class AddProduct extends AppCompatActivity {
     ImageView productImage;
-    TextView productName, productSeri, productDetail;
+    EditText productName, productDetail;
+    TextView productSeri;
     Button addStorage;
     ImageButton remove,add;
     EditText productQuantity;
@@ -33,8 +35,10 @@ public class AddProduct extends AppCompatActivity {
         setContentView(R.layout.activity_add_product);
         init();
         intent = getIntent();
-        Long seri = Long.valueOf(intent.getStringExtra("seri"));
+        Long seri = Long.valueOf(intent.getStringExtra(DatabaseHelper.Seri.toString()));
         productSeri.setText(seri + " ");
+        dbManager = new DBManager(this);
+        dbManager.open();
 
     }
 
@@ -69,7 +73,11 @@ public class AddProduct extends AppCompatActivity {
     }
 
     public void addToDatabase(View view) {
-        ContentValues values = new ContentValues();
-        values.put(databaseHelper.seri,);
+        String seri = productSeri.getText().toString();
+        String name = productName.getText().toString();
+        int quantity = productQuantity.getText().length();
+        if (dbManager.insert(seri, name, quantity) == 1){
+            Toast.makeText(this, "ADD SUCCESSFULLY", Toast.LENGTH_SHORT).show();
+        }
     }
 }

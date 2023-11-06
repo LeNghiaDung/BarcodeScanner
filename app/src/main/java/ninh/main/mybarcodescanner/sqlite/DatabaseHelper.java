@@ -24,7 +24,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Creating table query
 
     private static final String CREATE_TABLE = "create table " + TABLE_NAME + "(" + Seri
-            + " LONG PRIMARY KEY , " + NameProduct + " TEXT NOT NULL, " + Quantity + " INTEGER NOT NULL);";
+            + " TEXT PRIMARY KEY , " + NameProduct + " TEXT NOT NULL, " + Quantity + " INTEGER NOT NULL);";
 
     //CONTRUCTOR
     public DatabaseHelper(Context context) {

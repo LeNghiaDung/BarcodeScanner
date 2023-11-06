@@ -23,9 +23,6 @@
         <activity
             android:name=".AddProduct"
             android:exported="false" />
-        <activity
-            android:name=".bottom_dialog"
-            android:exported="false" />
 
         <meta-data
             android:name="com.google.mlkit.vision.DEPENDENCIES"
@@ -42,6 +39,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".sqlite.ModifyProductActivity"
+            android:exported="false"/>
     </application>
 
 </manifest>

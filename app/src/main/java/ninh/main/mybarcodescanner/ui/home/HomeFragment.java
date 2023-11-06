@@ -53,6 +53,7 @@ import ninh.main.mybarcodescanner.AddProduct;
 import ninh.main.mybarcodescanner.R;
 import ninh.main.mybarcodescanner.databinding.FragmentHomeBinding;
 import ninh.main.mybarcodescanner.sqlite.DBManager;
+import ninh.main.mybarcodescanner.sqlite.DatabaseHelper;
 import ninh.main.mybarcodescanner.sqlite.ModifyProductActivity;
 import ninh.main.mybarcodescanner.sqlite.ProductListActivity;
 
@@ -200,18 +201,20 @@ public class HomeFragment extends Fragment {
 
                 String rawValue = barcode.getRawValue();
 
-                long check = Long.parseLong(barcode.getRawValue());
+                String check = barcode.getRawValue();
 
-
-                if (dbManager.checkExisted(check)){
-                    Intent productIntent = new Intent(getActivity(), ModifyProductActivity.class);
-                    productIntent.putExtra("seri",check);
-                    startActivity(productIntent);
-                } else {
-                    Intent productIntent = new Intent(getActivity(), AddProduct.class);
-                    productIntent.putExtra("seri",check);
-                    startActivity(productIntent);
-                }
+                Intent productIntent = new Intent(getActivity(), AddProduct.class);
+                productIntent.putExtra("seri",check);
+                startActivity(productIntent);
+//                if (dbManager.checkExisted(check)){
+//                    Intent productIntent = new Intent(getActivity(), ModifyProductActivity.class);
+//                    productIntent.putExtra("seri",check);
+//                    startActivity(productIntent);
+//                } else {
+//                    Intent productIntent = new Intent(getActivity(), AddProduct.class);
+//                    productIntent.putExtra("seri",check);
+//                    startActivity(productIntent);
+//                }
             }
         }
     }

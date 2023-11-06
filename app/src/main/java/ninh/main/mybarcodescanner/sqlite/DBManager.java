@@ -30,12 +30,13 @@ public class DBManager {
         dbHelper.close();
     }
 
-    public void insert( Long seri , String name, Integer quantity) {
+    public int insert( String seri , String name, Integer quantity) {
         ContentValues contentValue = new ContentValues(); //KHOI TAO
         contentValue.put(DatabaseHelper.Seri, seri);
         contentValue.put(DatabaseHelper.NameProduct, name);
         contentValue.put(DatabaseHelper.Quantity, quantity);
         database.insert(DatabaseHelper.TABLE_NAME, null, contentValue);
+        return 1;
     }
 
     public Cursor fetch() {
@@ -61,11 +62,11 @@ public class DBManager {
         database.delete(DatabaseHelper.TABLE_NAME, DatabaseHelper.Seri + "=" + _seri, null);
     }
 
-    public boolean checkExisted(Long seri){
-        Cursor cursor = fetch();
+    public boolean checkExisted(String seri){
+        Cursor cursor = dbHelper.getData("SELECT * FROM " + DatabaseHelper.TABLE_NAME);
         while(cursor.moveToNext()){
-            long seriProduct = cursor.getInt(0);
-            if (seriProduct == seri){
+            String seriProduct = cursor.getString(0);
+            if (seri == seriProduct){
                 return true;
             }
         }

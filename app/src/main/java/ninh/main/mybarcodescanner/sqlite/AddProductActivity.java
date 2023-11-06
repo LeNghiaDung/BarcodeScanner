@@ -42,7 +42,7 @@ public class AddProductActivity extends Activity implements OnClickListener {
         switch (v.getId()) {
             case R.id.btnAdd:
 
-                final long seri = Long.parseLong(seriTextView.getText().toString());
+                final String seri = seriTextView.getText().toString();
                 final String name = nameProductTextView.getText().toString();
                 final int quantity = Integer.parseInt(quantityEditText.getText().toString());
 
