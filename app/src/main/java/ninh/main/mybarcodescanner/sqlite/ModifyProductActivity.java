@@ -19,13 +19,10 @@ import ninh.main.mybarcodescanner.R;
 
 public class ModifyProductActivity extends Activity implements OnClickListener{
     private TextView seriText;
-    private TextView nameProductText;
+    private EditText nameProductText;
     private Button saveBtn;
     private EditText quantityText;
     ImageButton remove,add;
-    private long _seri;
-    private int _quantity;
-    EditText quantity_editText;
     private DBManager dbManager;
     private DatabaseHelper database;
     String seri;
@@ -35,27 +32,16 @@ public class ModifyProductActivity extends Activity implements OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setTitle("Modify Record");
-
         setContentView(R.layout.activity_modify_product);
-
+        setTitle("Modify Record");
         dbManager = new DBManager(this);
         dbManager.open();
-
-        seriText = findViewById(R.id.seri_edittext);
-        nameProductText =  findViewById(R.id.nameProduct_edittext);
-        quantityText = findViewById(R.id.quantity_edittext);
-        saveBtn = (Button) findViewById(R.id.btn_save);
-        add = findViewById(R.id.btnIncrease);
-        remove = findViewById(R.id.btnDecrease);
-        quantity_editText = findViewById(R.id.quantity_edittext);
-
-
+        init();
 //        deleteBtn = (Button) findViewById(R.id.btn_delete);
 
         Intent intent = getIntent();
-        seri = intent.getStringExtra("seri");
+        seri = intent.getStringExtra(DatabaseHelper.Seri);
+        seriText.setText(seri + " ");
 
 //        String nameProduct = intent.getStringExtra("nameProduct");
 //        Integer quantity = Integer.valueOf(intent.getStringExtra("quantity"));
@@ -66,9 +52,17 @@ public class ModifyProductActivity extends Activity implements OnClickListener{
         saveBtn.setOnClickListener(this);
 //        deleteBtn.setOnClickListener(this);
     }
-
+    private void init(){
+        seriText = findViewById(R.id.seri_edittext);
+        nameProductText =  findViewById(R.id.nameProduct_edittext);
+        quantityText = findViewById(R.id.quantity_edittext);
+        saveBtn = (Button) findViewById(R.id.btn_save);
+        add = findViewById(R.id.btnIncrease);
+        remove = findViewById(R.id.btnDecrease);
+        quantityText = findViewById(R.id.quantity_edittext);
+    }
     public void getData(){
-        Cursor data = database.getData("SELECT * FROM "+ DatabaseHelper.TABLE_NAME + " WHERE " + DatabaseHelper.Seri +" LIKE "+_seri);
+        Cursor data = database.getData("SELECT * FROM "+ DatabaseHelper.TABLE_NAME + " WHERE " + DatabaseHelper.Seri +" LIKE "+seri);
 
         quantity = data.getInt(2);
 
@@ -83,13 +77,13 @@ public class ModifyProductActivity extends Activity implements OnClickListener{
         } else {
             remove.setEnabled(true);
             quantity -= 5;
-            quantity_editText.setText(quantity+"");
+            quantityText.setText(quantity+"");
         }
     }
 
     public void addQuantity(View view) {
         quantity +=5;
-        quantity_editText.setText(quantity+"");
+        quantityText.setText(quantity+"");
     }
 
     @Override
@@ -100,7 +94,7 @@ public class ModifyProductActivity extends Activity implements OnClickListener{
                 String nameProduct = nameProductText.getText().toString();
 //                Integer quantity = Integer.parseInt(String.valueOf(_quantity));
 
-                if (dbManager.update(_seri, nameProduct, _quantity) == 1){
+                if (dbManager.update(seri, nameProduct, quantity) == 1){
                     Toast.makeText(this, "Save Successfully", Toast.LENGTH_SHORT).show();
                 }
                 this.returnHome();

@@ -50,7 +50,7 @@ public class DBManager {
         return cursor;
     }
 
-    public int update(Long _seri, String name, Integer quantity) {
+    public int update(String _seri, String name, Integer quantity) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(DatabaseHelper.NameProduct, name);
         contentValues.put(DatabaseHelper.Quantity, quantity);

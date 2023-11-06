@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +19,6 @@ import ninh.main.mybarcodescanner.sqlite.DatabaseHelper;
 import ninh.main.mybarcodescanner.ui.home.HomeFragment;
 
 public class AddProduct extends AppCompatActivity {
-    ImageView productImage;
     EditText productName, productDetail;
     TextView productSeri;
     Button addStorage;
@@ -27,23 +27,23 @@ public class AddProduct extends AppCompatActivity {
     Intent intent;
     DBManager dbManager;
     DatabaseHelper databaseHelper;
-
+    String seri;
     int quantity = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
-        init();
-        intent = getIntent();
-        Long seri = Long.valueOf(intent.getStringExtra(DatabaseHelper.Seri.toString()));
-        productSeri.setText(seri + " ");
         dbManager = new DBManager(this);
         dbManager.open();
+        init();
+
+        intent = getIntent();
+        seri = intent.getStringExtra(DatabaseHelper.Seri);
+        productSeri.setText(seri + " ");
 
     }
 
     private void init(){
-        productImage = findViewById(R.id.productImage);
         productName = findViewById(R.id.productTitle);
         productSeri = findViewById(R.id.productSeri);
         productDetail = findViewById(R.id.productDetail);
@@ -52,7 +52,15 @@ public class AddProduct extends AppCompatActivity {
         add = findViewById(R.id.btnIncrease);
         productQuantity = findViewById(R.id.productQuantity);
     }
+    public void getData(){
+        Cursor data = databaseHelper.getData("SELECT * FROM "+ DatabaseHelper.TABLE_NAME + " WHERE " + DatabaseHelper.Seri +" LIKE "+ seri);
 
+        quantity = data.getInt(2);
+
+        productSeri.setText(data.getInt(0));
+        productName.setText(data.getString(1));
+        productQuantity.setText(data.getInt(2));
+    }
     public void removeQuantity(View view) {
         if (quantity == 0){
             remove.setEnabled(false);
