@@ -77,14 +77,13 @@ public class AddProduct extends AppCompatActivity {
         String seri = productSeri.getText().toString();
         String name = productName.getText().toString();
         int quantity = productQuantity.getText().length();
-        if (dbManager.insert(seri, name, quantity) == 1){
-            Toast.makeText(this, "ADD SUCCESSFULLY", Toast.LENGTH_SHORT).show();
-            Intent main = new Intent(this, ProductListActivity.class)
-                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(main);
+        dbManager.insert(seri, name, quantity);
+        Toast.makeText(this, "ADD SUCCESSFULLY", Toast.LENGTH_SHORT).show();
+        Intent main = new Intent(this, ProductListActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(main);
         }
 //        this.returnHome();
-    }
 
     public void returnHome() {
         Intent home_intent = new Intent(getApplicationContext(), ProductListActivity.class)

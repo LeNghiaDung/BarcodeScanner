@@ -30,13 +30,12 @@ public class DBManager {
         dbHelper.close();
     }
 
-    public int insert( String seri , String name, Integer quantity) {
+    public void insert( String seri , String name, Integer quantity) {
         ContentValues contentValue = new ContentValues(); //KHOI TAO
         contentValue.put(DatabaseHelper.Seri, seri);
         contentValue.put(DatabaseHelper.NameProduct, name);
         contentValue.put(DatabaseHelper.Quantity, quantity);
         database.insert(DatabaseHelper.TABLE_NAME, null, contentValue);
-        return 1;
     }
 
     public Cursor fetch() {
