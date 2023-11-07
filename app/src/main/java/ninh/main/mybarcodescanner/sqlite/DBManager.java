@@ -36,6 +36,13 @@ public class DBManager {
         contentValue.put(DatabaseHelper.NameProduct, name);
         contentValue.put(DatabaseHelper.Quantity, quantity);
         database.insert(DatabaseHelper.TABLE_NAME, null, contentValue);
+        Cursor cursor1 = database.rawQuery("SELECT * FROM " + DatabaseHelper.TABLE_NAME, null);
+        while (cursor1.moveToNext()) {
+            String bienTamThoi = cursor1.getString(0);
+            String bienTamThoi1 = cursor1.getString(1);
+            int bienTamThoi2 = cursor1.getInt(2);
+            Toast.makeText(context, bienTamThoi + bienTamThoi1 + bienTamThoi2, Toast.LENGTH_SHORT).show();
+        }
     }
 
     public Cursor fetch() {
