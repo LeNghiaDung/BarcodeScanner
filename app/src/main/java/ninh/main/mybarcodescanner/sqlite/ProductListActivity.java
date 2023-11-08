@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import ninh.main.mybarcodescanner.AddProduct;
 import ninh.main.mybarcodescanner.R;
 
 public class ProductListActivity extends AppCompatActivity{
@@ -74,16 +75,14 @@ public class ProductListActivity extends AppCompatActivity{
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-        if (id == R.id.btnAdd) {
-
-            Intent add_mem = new Intent(this, AddProductActivity.class);
-            startActivity(add_mem);
-
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//
+//        int id = item.getItemId();
+//        if (id == R.id.btnAdd) {
+//            Intent add_mem = new Intent(this, AddProduct.class);
+//            startActivity(add_mem);
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 }

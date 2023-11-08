@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,6 +26,7 @@ public class ModifyProductActivity extends Activity implements OnClickListener{
     ImageButton remove,add;
     private DBManager dbManager;
     private DatabaseHelper database;
+    private SQLiteDatabase sqLiteDatabase;
     String seri;
     int quantity = 0;
 
@@ -62,7 +64,7 @@ public class ModifyProductActivity extends Activity implements OnClickListener{
         quantityText = findViewById(R.id.quantity_edittext);
     }
     public void getData(){
-        Cursor data = database.getData("SELECT * FROM "+ DatabaseHelper.TABLE_NAME + " WHERE " + DatabaseHelper.Seri +" LIKE "+seri);
+        Cursor data = sqLiteDatabase.rawQuery("SELECT * FROM "+ DatabaseHelper.TABLE_NAME + " WHERE " + DatabaseHelper.Seri +" LIKE "+seri,null);
 
         quantity = data.getInt(2);
 

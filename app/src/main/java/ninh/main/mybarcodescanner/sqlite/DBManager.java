@@ -69,7 +69,7 @@ public class DBManager {
     }
 
     public boolean checkExisted(String seri){
-        Cursor data = dbHelper.getData("SELECT * FROM " + DatabaseHelper.TABLE_NAME + " WHERE " + DatabaseHelper.Seri + " LIKE " + seri);
+        Cursor data = database.rawQuery("SELECT * FROM " + DatabaseHelper.TABLE_NAME + " WHERE " + DatabaseHelper.Seri + " LIKE " + seri, null);
         while(data.moveToNext()){
             String seriProduct = data.getString(0);
             if (seri.equals(seriProduct)){
