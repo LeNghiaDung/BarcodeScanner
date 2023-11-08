@@ -2,6 +2,7 @@ package ninh.main.mybarcodescanner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -84,17 +85,21 @@ public class  AddProduct extends AppCompatActivity {
         Intent main = new Intent(this, ProductListActivity.class)
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(main);
-//        closeKeyboard();
+        hideSoftKeyboard(this);
         }
 //        this.returnHome();
 
-//    private void closeKeyboard(){
-//        View view = this.getCurrentFocus();
-//        if(view != null){
-//            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//            imm.hideSoftInputFromWindow(view.getWindowToken(),0);
-//        }
-//    }
+    public static void hideSoftKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager =
+                (InputMethodManager) activity.getSystemService(
+                        Activity.INPUT_METHOD_SERVICE);
+        if(inputMethodManager.isAcceptingText()){
+            inputMethodManager.hideSoftInputFromWindow(
+                    activity.getCurrentFocus().getWindowToken(),
+                    0
+            );
+        }
+    }
     public void returnHome() {
         Intent home_intent = new Intent(getApplicationContext(), ProductListActivity.class)
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
