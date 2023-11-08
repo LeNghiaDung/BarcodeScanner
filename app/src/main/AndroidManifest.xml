@@ -21,7 +21,8 @@
         android:theme="@style/Theme.MyBarcodeScanner"
         tools:targetApi="31">
         <activity
-            android:windowSoftInputMode="adjustResize"
+            android:windowSoftInputMode="adjustPan"
+            android:isScrollContainer="false"
             android:name=".AddProduct"
             android:exported="false" />
 
