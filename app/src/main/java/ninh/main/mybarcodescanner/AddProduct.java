@@ -78,23 +78,24 @@ public class  AddProduct extends AppCompatActivity {
     public void addToDatabase(View view) {
         String seri = productSeri.getText().toString();
         String name = productName.getText().toString();
-        int quantity = productQuantity.getText().length();
+//        int quantity = productQuantity.getText().length();
         dbManager.insert(seri, name, quantity);
         Toast.makeText(this, "ADD SUCCESSFULLY", Toast.LENGTH_SHORT).show();
         Intent main = new Intent(this, ProductListActivity.class)
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(main);
-//        closeKeyboard();
+        closeKeyboard();
         }
 //        this.returnHome();
 
-//    private void closeKeyboard(){
-//        View view = this.getCurrentFocus();
-//        if(view != null){
-//            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//            imm.hideSoftInputFromWindow(view.getWindowToken(),0);
-//        }
-//    }
+    private void closeKeyboard(){
+        View view = this.getCurrentFocus();
+        if(view != null){
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(),0);
+        }
+    }
+
     public void returnHome() {
         Intent home_intent = new Intent(getApplicationContext(), ProductListActivity.class)
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

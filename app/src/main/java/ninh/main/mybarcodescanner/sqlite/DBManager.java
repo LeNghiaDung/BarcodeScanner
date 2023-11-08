@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.provider.ContactsContract;
 import android.widget.Toast;
 
 public class DBManager {
@@ -41,7 +42,7 @@ public class DBManager {
             String bienTamThoi = cursor1.getString(0);
             String bienTamThoi1 = cursor1.getString(1);
             int bienTamThoi2 = cursor1.getInt(2);
-            Toast.makeText(context, bienTamThoi + bienTamThoi1 + bienTamThoi2, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, bienTamThoi + bienTamThoi1 + bienTamThoi2 + " ", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -68,15 +69,37 @@ public class DBManager {
         database.delete(DatabaseHelper.TABLE_NAME, DatabaseHelper.Seri + "=" + _seri, null);
     }
 
-    public boolean checkExisted(String seri){
-        Cursor data = database.rawQuery("SELECT * FROM " + DatabaseHelper.TABLE_NAME + " WHERE " + DatabaseHelper.Seri + " LIKE " + seri, null);
-        while(data.moveToNext()){
-            String seriProduct = data.getString(0);
-            if (seri.equals(seriProduct)){
-                return true;
-            }
+//    public boolean checkExisted(String seri){
+//        String query = "SELECT * FROM my_table WHERE column_name = ?";
+//        Cursor data = database.rawQuery("SELECT * FROM " + DatabaseHelper.TABLE_NAME + " WHERE " + DatabaseHelper.Seri + " =  " + seri, null);
+////        Cursor data = database.query(DatabaseHelper.TABLE_NAME, new String[] { "COUNT(id)" }, )
+//        while(data.moveToNext()){
+//            String seriProduct = data.getString(0);
+//            if (seri.compareTo(seriProduct)==0){
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+
+    public boolean checkExisted(String seri) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String selection =  DatabaseHelper.Seri + " = ? ";
+        String[] selectionArgs = {seri};
+        Cursor cursor = db.query(DatabaseHelper.TABLE_NAME, null, selection, selectionArgs, null, null, null);
+        // Thực hiện truy vấn
+//        Cursor cursor = db.rawQuery(query, selectionArgs);
+
+        boolean exists = cursor != null && cursor.getCount() > 0;
+
+        // Đóng cursor và kết nối đến cơ sở dữ liệu
+        if (cursor != null) {
+            cursor.close();
         }
-        return false;
+        db.close();
+        Toast.makeText(context, "CHECK EXISTED " + exists, Toast.LENGTH_SHORT).show();
+        return exists;
+
     }
 
 }
