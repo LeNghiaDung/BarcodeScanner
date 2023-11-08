@@ -2,6 +2,7 @@ package ninh.main.mybarcodescanner.sqlite;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -47,6 +48,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getData(String sql){
         SQLiteDatabase database = getReadableDatabase();
-        return database.rawQuery(sql,null);
+        try {
+            return database.rawQuery(sql, null);
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 }

@@ -72,7 +72,7 @@ public class DBManager {
         Cursor data = dbHelper.getData("SELECT * FROM " + DatabaseHelper.TABLE_NAME + " WHERE " + DatabaseHelper.Seri + " LIKE " + seri);
         while(data.moveToNext()){
             String seriProduct = data.getString(0);
-            if (seri == seriProduct){
+            if (seri.equals(seriProduct)){
                 return true;
             }
         }
