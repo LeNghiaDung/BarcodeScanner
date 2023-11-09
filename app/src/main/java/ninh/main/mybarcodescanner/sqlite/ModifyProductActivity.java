@@ -44,7 +44,9 @@ public class ModifyProductActivity extends Activity implements OnClickListener{
         Intent intent = getIntent();
         seri = intent.getStringExtra(DatabaseHelper.Seri);
         seriText.setText(seri + " ");
-
+        nameProductText.setText((nameProductText + " "));
+        Cursor data = database.getData("SELECT * FROM " + DatabaseHelper.TABLE_NAME + " WHERE " + DatabaseHelper.Seri + " = " + seri + " ", null);
+        Cursor data1 = database.getData("SELECT * FROM " + DatabaseHelper.TABLE_NAME + " WHERE " + DatabaseHelper.NameProduct + " = " + nameProductText + " ", null);
 //        String nameProduct = intent.getStringExtra("nameProduct");
 //        Integer quantity = Integer.valueOf(intent.getStringExtra("quantity"));
 //        _seri = Long.parseLong(String.valueOf(seri));

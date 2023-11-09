@@ -15,7 +15,7 @@ public class DBManager {
 
     private Context context;
 
-    private SQLiteDatabase database;
+    public SQLiteDatabase database;
 
     public DBManager(Context c) {
         context = c;
@@ -86,7 +86,7 @@ public class DBManager {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String selection =  DatabaseHelper.Seri + " = ? ";
         String[] selectionArgs = {seri};
-        Cursor data = database.rawQuery("SELECT * FROM " + DatabaseHelper.TABLE_NAME + " WHERE " + DatabaseHelper.Seri + " =  " + seri + " ", null);
+        Cursor data = database.rawQuery("SELECT * FROM " + DatabaseHelper.TABLE_NAME + " WHERE " + DatabaseHelper.Seri + " = " + seri + " ", null);
         // Thực hiện truy vấn
 //        Cursor cursor = db.rawQuery(query, selectionArgs);
 

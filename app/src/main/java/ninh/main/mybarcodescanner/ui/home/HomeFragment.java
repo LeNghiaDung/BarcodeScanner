@@ -4,6 +4,8 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.media.AudioManager;
@@ -65,6 +67,7 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     boolean barcodeDetected = false;
     private DBManager dbManager;
+    public SQLiteDatabase database;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -202,13 +205,17 @@ public class HomeFragment extends Fragment {
                 String rawValue = barcode.getRawValue();
 
                 String check = barcode.getRawValue();
+
+                String check1 = barcode.getRawValue();
                 if (dbManager.checkExisted(check)){
                     Intent productIntent = new Intent(getActivity(), ModifyProductActivity.class);
                     productIntent.putExtra(DatabaseHelper.Seri,check);
+                    Cursor data = database.rawQuery("SELECT * FROM " + DatabaseHelper.TABLE_NAME + " WHERE " + DatabaseHelper.Seri + " = " + check + " ", null);
                     startActivity(productIntent);
                 } else {
                     Intent productIntent = new Intent(getActivity(), AddProduct.class);
                     productIntent.putExtra(DatabaseHelper.Seri,check);
+                    productIntent.putExtra(DatabaseHelper.NameProduct,check1);
                     startActivity(productIntent);
                 }
             }
