@@ -86,15 +86,15 @@ public class DBManager {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String selection =  DatabaseHelper.Seri + " = ? ";
         String[] selectionArgs = {seri};
-        Cursor cursor = db.query(DatabaseHelper.TABLE_NAME, null, selection, selectionArgs, null, null, null);
+        Cursor data = database.rawQuery("SELECT * FROM " + DatabaseHelper.TABLE_NAME + " WHERE " + DatabaseHelper.Seri + " =  " + seri + " ", null);
         // Thực hiện truy vấn
 //        Cursor cursor = db.rawQuery(query, selectionArgs);
 
-        boolean exists = cursor != null && cursor.getCount() > 0;
+        boolean exists = data != null && data.getCount() > 0;
 
         // Đóng cursor và kết nối đến cơ sở dữ liệu
-        if (cursor != null) {
-            cursor.close();
+        if (data != null) {
+            data.close();
         }
         db.close();
         Toast.makeText(context, "CHECK EXISTED " + exists, Toast.LENGTH_SHORT).show();
