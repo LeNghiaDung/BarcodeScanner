@@ -210,7 +210,6 @@ public class HomeFragment extends Fragment {
                 if (dbManager.checkExisted(check)){
                     Intent productIntent = new Intent(getActivity(), ModifyProductActivity.class);
                     productIntent.putExtra(DatabaseHelper.Seri,check);
-                    Cursor data = database.rawQuery("SELECT * FROM " + DatabaseHelper.TABLE_NAME + " WHERE " + DatabaseHelper.Seri + " = " + check + " ", null);
                     startActivity(productIntent);
                 } else {
                     Intent productIntent = new Intent(getActivity(), AddProduct.class);

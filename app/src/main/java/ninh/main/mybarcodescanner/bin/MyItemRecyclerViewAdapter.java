@@ -12,10 +12,6 @@ import ninh.main.mybarcodescanner.databinding.FragmentBinBinding;
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link PlaceholderItem}.
- * TODO: Replace the implementation with code for your data type.
- */
 public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
 
     private final List<PlaceholderItem> mValues;
@@ -26,9 +22,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         return new ViewHolder(FragmentBinBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
-
     }
 
     @Override

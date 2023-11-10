@@ -22,12 +22,14 @@ public class ModifyProductActivity extends Activity implements OnClickListener{
     private TextView seriText;
     private EditText nameProductText;
     private Button saveBtn;
+    private ImageButton deleteBtn;
     private EditText quantityText;
     ImageButton remove,add;
     private DBManager dbManager;
     private DatabaseHelper database;
     private SQLiteDatabase sqLiteDatabase;
     String seri;
+    String name;
     int quantity = 0;
 
 
@@ -39,22 +41,15 @@ public class ModifyProductActivity extends Activity implements OnClickListener{
         dbManager = new DBManager(this);
         dbManager.open();
         init();
-//        deleteBtn = (Button) findViewById(R.id.btn_delete);
+
 
         Intent intent = getIntent();
         seri = intent.getStringExtra(DatabaseHelper.Seri);
         seriText.setText(seri + " ");
-        nameProductText.setText((nameProductText + " "));
-        Cursor data = database.getData("SELECT * FROM " + DatabaseHelper.TABLE_NAME + " WHERE " + DatabaseHelper.Seri + " = " + seri + " ", null);
-        Cursor data1 = database.getData("SELECT * FROM " + DatabaseHelper.TABLE_NAME + " WHERE " + DatabaseHelper.NameProduct + " = " + nameProductText + " ", null);
-//        String nameProduct = intent.getStringExtra("nameProduct");
-//        Integer quantity = Integer.valueOf(intent.getStringExtra("quantity"));
-//        _seri = Long.parseLong(String.valueOf(seri));
-//        nameProductText.setText(nameProduct);
-//        _quantity = Integer.parseInt(String.valueOf(quantity));
+
 
         saveBtn.setOnClickListener(this);
-//        deleteBtn.setOnClickListener(this);
+        deleteBtn.setOnClickListener(this);
     }
     private void init(){
         seriText = findViewById(R.id.seri_edittext);
@@ -64,15 +59,17 @@ public class ModifyProductActivity extends Activity implements OnClickListener{
         add = findViewById(R.id.btnIncrease);
         remove = findViewById(R.id.btnDecrease);
         quantityText = findViewById(R.id.quantity_edittext);
+        deleteBtn = (ImageButton) findViewById(R.id.btn_delete);
     }
     public void getData(){
-        Cursor data = sqLiteDatabase.rawQuery("SELECT * FROM "+ DatabaseHelper.TABLE_NAME + " WHERE " + DatabaseHelper.Seri +" LIKE "+seri,null);
-
+        String selection =  DatabaseHelper.Seri + " = ? ";
+        String[] selectionArgs = {seri+ " "};
+        Cursor data = sqLiteDatabase.query(DatabaseHelper.TABLE_NAME,null,selection,selectionArgs,null,null,null);
+        name = data.getString(1);
         quantity = data.getInt(2);
 
-        seriText.setText(data.getInt(0));
-        nameProductText.setText(data.getString(1));
-        quantityText.setText(data.getInt(2));
+        nameProductText.setText(name);
+        quantityText.setText(quantity);
     }
 
     public void removeQuantity(View view) {
@@ -104,10 +101,10 @@ public class ModifyProductActivity extends Activity implements OnClickListener{
                 this.returnHome();
                 break;
 
-//            case (R.id.btn_delete):
-//                dbManager.delete(_seri);
-//                this.returnHome();
-//                break;
+            case (R.id.btn_delete):
+                dbManager.delete(seri);
+                this.returnHome();
+                break;
         }
     }
 

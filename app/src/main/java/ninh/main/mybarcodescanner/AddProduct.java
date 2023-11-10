@@ -3,25 +3,19 @@ package ninh.main.mybarcodescanner;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
-import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import ninh.main.mybarcodescanner.sqlite.AddProductActivity;
 import ninh.main.mybarcodescanner.sqlite.DBManager;
 import ninh.main.mybarcodescanner.sqlite.DatabaseHelper;
 import ninh.main.mybarcodescanner.sqlite.ProductListActivity;
-import ninh.main.mybarcodescanner.ui.home.HomeFragment;
 
 public class  AddProduct extends AppCompatActivity {
     EditText productName, productDetail;
@@ -79,7 +73,6 @@ public class  AddProduct extends AppCompatActivity {
     public void addToDatabase(View view) {
         String seri = productSeri.getText().toString();
         String name = productName.getText().toString();
-        int quantity = productQuantity.getText().length();
         dbManager.insert(seri, name, quantity);
         Toast.makeText(this, "ADD SUCCESSFULLY", Toast.LENGTH_SHORT).show();
         Intent main = new Intent(this, ProductListActivity.class)

@@ -66,6 +66,7 @@ public class DBManager {
     }
 
     public void delete(String _seri) {
+        _seri = _seri + " ";
         database.delete(DatabaseHelper.TABLE_NAME, DatabaseHelper.Seri + "=" + _seri, null);
     }
 
@@ -85,10 +86,8 @@ public class DBManager {
     public boolean checkExisted(String seri) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String selection =  DatabaseHelper.Seri + " = ? ";
-        String[] selectionArgs = {seri};
-        Cursor data = database.rawQuery("SELECT * FROM " + DatabaseHelper.TABLE_NAME + " WHERE " + DatabaseHelper.Seri + " = " + seri + " ", null);
-        // Thực hiện truy vấn
-//        Cursor cursor = db.rawQuery(query, selectionArgs);
+        String[] selectionArgs = {seri+ " "};
+        Cursor data = database.query(DatabaseHelper.TABLE_NAME,null,selection,selectionArgs,null,null,null);
 
         boolean exists = data != null && data.getCount() > 0;
 

@@ -34,8 +34,9 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.mSeri.setText(mValues.get(position).seri);
+        holder.mName.setText(mValues.get(position).name);
+        holder.mName.setText(mValues.get(position).quantity);
     }
 
     @Override
@@ -44,19 +45,16 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final TextView mIdView;
-        public final TextView mContentView;
+        public final TextView mSeri;
+        public final TextView mName;
+        public final TextView mQuantity;
         public PlaceholderItem mItem;
 
         public ViewHolder(FragmentListBinding binding) {
             super(binding.getRoot());
-            mIdView = binding.tvSeri;
-            mContentView = binding.tvNameProduct;
-        }
-
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            mSeri = binding.tvSeri;
+            mName = binding.tvNameProduct;
+            mQuantity = binding.tvQuantityProduct;
         }
     }
 }
