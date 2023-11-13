@@ -20,7 +20,7 @@ import ninh.main.mybarcodescanner.sqlite.ProductListActivity;
 public class  AddProduct extends AppCompatActivity {
     EditText productName, productDetail;
     TextView productSeri;
-    Button addStorage;
+    Button addStorage; //THUA
     ImageButton remove,add;
     EditText productQuantity;
     Intent intent;

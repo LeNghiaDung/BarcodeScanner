@@ -22,6 +22,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // database version
     static final int DB_VERSION = 1;
 
+    public DBManager dbManager;
+
     // Creating table query
 
     private static final String CREATE_TABLE = "create table " + TABLE_NAME + "(" + Seri

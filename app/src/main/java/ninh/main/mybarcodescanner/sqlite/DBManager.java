@@ -2,11 +2,9 @@ package ninh.main.mybarcodescanner.sqlite;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.provider.ContactsContract;
 import android.widget.Toast;
 
 public class DBManager {
@@ -16,6 +14,7 @@ public class DBManager {
     private Context context;
 
     public SQLiteDatabase database;
+
 
     public DBManager(Context c) {
         context = c;
