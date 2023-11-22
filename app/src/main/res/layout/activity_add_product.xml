@@ -42,7 +42,7 @@
                     android:layout_marginBottom="20dp"
                     android:background="@color/transparent"
                     android:contentDescription="Click to Cancel"
-                    android:onClick="returnScan"
+                    android:onClick="returnHome"
                     app:srcCompat="@drawable/back"
                     tools:ignore="TouchTargetSizeCheck" />
 

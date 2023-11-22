@@ -16,6 +16,7 @@ import android.widget.Toast;
 import ninh.main.mybarcodescanner.sqlite.DBManager;
 import ninh.main.mybarcodescanner.sqlite.DatabaseHelper;
 import ninh.main.mybarcodescanner.sqlite.ProductListActivity;
+import ninh.main.mybarcodescanner.ui.home.HomeFragment;
 
 public class  AddProduct extends AppCompatActivity {
     EditText productName, productDetail;
@@ -66,10 +67,6 @@ public class  AddProduct extends AppCompatActivity {
         productQuantity.setText(quantity+"");
     }
 
-    public void returnScan(View view) {
-        finish();
-    }
-
     public void addToDatabase(View view) {
         String seri = productSeri.getText().toString();
         String name = productName.getText().toString();
@@ -79,6 +76,8 @@ public class  AddProduct extends AppCompatActivity {
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(main);
         hideSoftKeyboard(this);
+//        Intent intent1 = new Intent(this, List.class);
+//        startActivity(intent1);
         }
 //        this.returnHome();
 
@@ -93,8 +92,8 @@ public class  AddProduct extends AppCompatActivity {
             );
         }
     }
-    public void returnHome() {
-        Intent home_intent = new Intent(getApplicationContext(), ProductListActivity.class)
+    public void returnHome(View view) {
+        Intent home_intent = new Intent(getApplicationContext(), HomeFragment.class)
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(home_intent);
     }

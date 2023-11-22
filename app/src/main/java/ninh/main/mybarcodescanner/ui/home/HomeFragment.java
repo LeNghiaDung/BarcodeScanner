@@ -1,12 +1,9 @@
 package ninh.main.mybarcodescanner.ui.home;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Point;
 import android.graphics.Rect;
 import android.media.AudioManager;
 import android.media.Image;
@@ -16,7 +13,6 @@ import android.util.Size;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.OptIn;
@@ -32,7 +28,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -57,7 +52,6 @@ import ninh.main.mybarcodescanner.databinding.FragmentHomeBinding;
 import ninh.main.mybarcodescanner.sqlite.DBManager;
 import ninh.main.mybarcodescanner.sqlite.DatabaseHelper;
 import ninh.main.mybarcodescanner.sqlite.ModifyProductActivity;
-import ninh.main.mybarcodescanner.sqlite.ProductListActivity;
 
 public class HomeFragment extends Fragment {
     private ListenableFuture cameraProviderFuture;
@@ -67,6 +61,7 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     boolean barcodeDetected = false;
     private DBManager dbManager;
+    public DatabaseHelper helper;
     public SQLiteDatabase database;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -199,14 +194,12 @@ public class HomeFragment extends Fragment {
 
         private void readerBarcodeData(List<Barcode> barcodes, BarcodeScanner scanner) {
             for (Barcode barcode : barcodes) {
-                String checkSeri = null;
                 Rect bounds = barcode.getBoundingBox();
 
                 String rawValue = barcode.getRawValue();
 
                 String check = barcode.getRawValue();
 
-                String check1 = barcode.getRawValue();
                 if (dbManager.checkExisted(check)){
                     Intent productIntent = new Intent(getActivity(), ModifyProductActivity.class);
                     productIntent.putExtra(DatabaseHelper.Seri,check);
@@ -214,7 +207,6 @@ public class HomeFragment extends Fragment {
                 } else {
                     Intent productIntent = new Intent(getActivity(), AddProduct.class);
                     productIntent.putExtra(DatabaseHelper.Seri,check);
-                    productIntent.putExtra(DatabaseHelper.NameProduct,check1);
                     startActivity(productIntent);
                 }
             }

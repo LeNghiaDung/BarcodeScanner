@@ -58,12 +58,4 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
-
-    public void click(View view) {
-        Toast.makeText(this, "Checkkkkk", Toast.LENGTH_SHORT).show();
-    }
-
-    public void clickDelete(View view) {
-        Toast.makeText(this, "Ninh thoi", Toast.LENGTH_SHORT).show();
-    }
 }

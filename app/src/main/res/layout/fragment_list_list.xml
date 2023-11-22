@@ -1,13 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/list"
-    android:name="ninh.main.mybarcodescanner.list.ItemFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    app:layoutManager="LinearLayoutManager"
-    tools:context=".list.ItemFragment"
-    tools:listitem="@layout/fragment_list" />
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:background="@drawable/btnbackground">
+
+    <ImageView
+        android:id="@+id/imageProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_launcher_background"
+        android:layout_margin="10dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="10">
+
+        <TextView
+            android:id="@+id/tvSeri"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="Seri"
+            android:textStyle="bold"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textSize="@dimen/textSize" />
+
+        <TextView
+            android:id="@+id/tvNameProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="Name Product"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textSize="@dimen/textSize" />
+        <TextView
+            android:id="@+id/tvQuantityProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="Quantity"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textSize="@dimen/textSize" />
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/imgEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@color/transparent"
+        android:contentDescription="Edit"
+        android:src="@drawable/edit"
+        tools:ignore="TouchTargetSizeCheck"
+        android:layout_margin="5dp"/>
+
+    <ImageButton
+        android:id="@+id/imgDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@color/transparent"
+        android:contentDescription="Delete"
+        android:onClick="click"
+        android:src="@drawable/delete"
+        tools:ignore="TouchTargetSizeCheck"
+        android:layout_margin="5dp"/>
+
+</LinearLayout>

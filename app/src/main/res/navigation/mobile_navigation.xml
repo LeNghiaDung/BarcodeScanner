@@ -12,13 +12,13 @@
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/nav_list"
-        android:name="ninh.main.mybarcodescanner.list.ItemFragment"
         android:label="@string/menu_list"
-        tools:layout="@layout/fragment_list_list"/>
+        android:name="ninh.main.mybarcodescanner.list.ListFragment"
+        tools:layout="@layout/fragment_list"/>
     <fragment
         android:id="@+id/nav_bin"
-        android:name="ninh.main.mybarcodescanner.bin.ItemFragment"
         android:label="@string/menu_bin"
+        android:name="ninh.main.mybarcodescanner.BinList"
         tools:layout="@layout/fragment_bin_list"/>
 
 </navigation>

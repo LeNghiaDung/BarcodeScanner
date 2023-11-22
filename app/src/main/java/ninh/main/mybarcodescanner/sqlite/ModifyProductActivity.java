@@ -1,6 +1,5 @@
 package ninh.main.mybarcodescanner.sqlite;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -14,11 +13,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
+import ninh.main.mybarcodescanner.Product;
 import ninh.main.mybarcodescanner.R;
 
-public class ModifyProductActivity extends Activity implements OnClickListener{
+public class ModifyProductActivity extends Activity{
     private TextView seriText;
     private EditText nameProductText;
     private Button saveBtn;
@@ -26,8 +24,9 @@ public class ModifyProductActivity extends Activity implements OnClickListener{
     private EditText quantityText;
     ImageButton remove,add;
     private DBManager dbManager;
-    private DatabaseHelper database;
-    private SQLiteDatabase sqLiteDatabase;
+    private DatabaseHelper helper;
+    SQLiteDatabase sqLiteDatabase;
+    Product product;
     String seri;
     String name;
     int quantity = 0;
@@ -40,16 +39,13 @@ public class ModifyProductActivity extends Activity implements OnClickListener{
         setTitle("Modify Record");
         dbManager = new DBManager(this);
         dbManager.open();
+        helper = new DatabaseHelper(this);  // Add this line to initialize the DatabaseHelper
         init();
-
 
         Intent intent = getIntent();
         seri = intent.getStringExtra(DatabaseHelper.Seri);
-        seriText.setText(seri + " ");
-
-
-        saveBtn.setOnClickListener(this);
-        deleteBtn.setOnClickListener(this);
+        seriText.setText(seri);
+        getData();
     }
     private void init(){
         seriText = findViewById(R.id.seri_edittext);
@@ -61,15 +57,27 @@ public class ModifyProductActivity extends Activity implements OnClickListener{
         quantityText = findViewById(R.id.quantity_edittext);
         deleteBtn = (ImageButton) findViewById(R.id.btn_delete);
     }
-    public void getData(){
-        String selection =  DatabaseHelper.Seri + " = ? ";
-        String[] selectionArgs = {seri+ " "};
-        Cursor data = sqLiteDatabase.query(DatabaseHelper.TABLE_NAME,null,selection,selectionArgs,null,null,null);
-        name = data.getString(1);
-        quantity = data.getInt(2);
 
-        nameProductText.setText(name);
-        quantityText.setText(quantity);
+    public void getData(){
+        try (Cursor data = dbManager.getData(seri)) {
+            if (data != null && data.moveToFirst()) {
+                // Check if the Cursor has data and move to the first row
+                Toast.makeText(this, "Existed", Toast.LENGTH_SHORT).show();
+
+                // Retrieve data from the Cursor
+                name = data.getString(1);
+                quantity = data.getInt(2);
+
+                // Set the values to the corresponding views
+                nameProductText.setText(name);
+                quantityText.setText(String.valueOf(quantity));
+            } else {
+                Toast.makeText(this, "No data found", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Error retrieving data", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void removeQuantity(View view) {
@@ -87,30 +95,23 @@ public class ModifyProductActivity extends Activity implements OnClickListener{
         quantityText.setText(quantity+"");
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case (R.id.btn_save):
-//                Long _seri = Long.parseLong((String.valueOf(seri)));
-                String nameProduct = nameProductText.getText().toString();
-//                Integer quantity = Integer.parseInt(String.valueOf(_quantity));
-
-                if (dbManager.update(seri, nameProduct, quantity) == 1){
-                    Toast.makeText(this, "Save Successfully", Toast.LENGTH_SHORT).show();
-                }
-                this.returnHome();
-                break;
-
-            case (R.id.btn_delete):
-                dbManager.delete(seri);
-                this.returnHome();
-                break;
-        }
-    }
-
-    public void returnHome() {
+    public void returnScanModify(View view) {
         Intent home_intent = new Intent(getApplicationContext(), ProductListActivity.class)
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(home_intent);
+    }
+
+    public void saveData(View view) {
+        String nameProduct = nameProductText.getText().toString();
+        long check = dbManager.update(seri, nameProduct, quantity);
+        if (check == 1){
+            Toast.makeText(this, "Save Successfully", Toast.LENGTH_SHORT).show();
+        }
+        this.returnScanModify(view);
+    }
+
+    public void deleteData(View view) {
+        dbManager.delete(seri);
+        this.returnScanModify(view);
     }
 }

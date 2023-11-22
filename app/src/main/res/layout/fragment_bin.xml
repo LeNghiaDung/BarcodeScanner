@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/margin"
+    android:layout_margin = "@dimen/margin"
     android:gravity="center"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="@drawable/btnbackground">
 
 
     <ImageView
@@ -14,6 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:layout_margin="10dp"
         android:src="@drawable/ic_launcher_background" />
 
     <LinearLayout
@@ -52,6 +54,7 @@
         android:contentDescription="deletefrv"
         android:onClick="clickDelete"
         android:src="@drawable/deletefoever"
+        android:layout_margin="10dp"
         tools:ignore="TouchTargetSizeCheck" />
 
 </LinearLayout>

@@ -8,7 +8,7 @@
     <dimen name="text_margin">5dp</dimen>
     <dimen name="textSize">20dp</dimen>
     <dimen name="padding_item">10dp</dimen>
-    <dimen name="margin">5dp</dimen>
+    <dimen name="margin">10dp</dimen>
     <dimen name="margin_item">5dp</dimen>
     <dimen name="sizeButton">50dp</dimen>
 
