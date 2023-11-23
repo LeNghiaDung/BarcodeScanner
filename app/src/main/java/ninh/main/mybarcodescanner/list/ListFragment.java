@@ -32,11 +32,13 @@ public class ListFragment extends Fragment {
 
         binding = FragmentListBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
         listView = root.findViewById(R.id.list);
         products = new ArrayList<>();
         getData();
         adapter = new ListAdapter(getActivity(),products,R.layout.fragment_list_list);
         listView.setAdapter(adapter);
+
         return root;
 
     }

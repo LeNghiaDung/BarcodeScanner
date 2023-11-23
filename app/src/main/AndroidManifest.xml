@@ -44,7 +44,7 @@
         </activity>
 
         <activity
-            android:name=".sqlite.ModifyProductActivity"
+            android:name=".ModifyProductActivity"
             android:exported="false" />
     </application>
 

@@ -1,4 +1,4 @@
-package ninh.main.mybarcodescanner.sqlite;
+package ninh.main.mybarcodescanner;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import ninh.main.mybarcodescanner.Product;
 import ninh.main.mybarcodescanner.R;
+import ninh.main.mybarcodescanner.sqlite.DBManager;
+import ninh.main.mybarcodescanner.sqlite.DatabaseHelper;
 import ninh.main.mybarcodescanner.ui.home.HomeFragment;
 
 public class ModifyProductActivity extends Activity{

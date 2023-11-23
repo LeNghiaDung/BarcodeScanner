@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 import ninh.main.mybarcodescanner.sqlite.DBManager;
 import ninh.main.mybarcodescanner.sqlite.DatabaseHelper;
-import ninh.main.mybarcodescanner.sqlite.ModifyProductActivity;
 
 public class ListAdapter extends BaseAdapter {
     Context context;

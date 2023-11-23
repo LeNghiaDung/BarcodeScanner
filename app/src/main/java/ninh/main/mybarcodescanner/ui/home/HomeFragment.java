@@ -51,7 +51,7 @@ import ninh.main.mybarcodescanner.R;
 import ninh.main.mybarcodescanner.databinding.FragmentHomeBinding;
 import ninh.main.mybarcodescanner.sqlite.DBManager;
 import ninh.main.mybarcodescanner.sqlite.DatabaseHelper;
-import ninh.main.mybarcodescanner.sqlite.ModifyProductActivity;
+import ninh.main.mybarcodescanner.ModifyProductActivity;
 
 public class HomeFragment extends Fragment {
     private ListenableFuture cameraProviderFuture;
@@ -69,9 +69,11 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        //Khai bao DBManager
         dbManager = new DBManager(getActivity());
-        dbManager.open();
 
+        // Activity = this / MainActivity.this
+        // Fragment = getActivity();
         previewView = root.findViewById(R.id.previewView);
         this.getActivity().getWindow().setFlags(1024,1024);
 
@@ -119,13 +121,19 @@ public class HomeFragment extends Fragment {
 
     private void bindpreview(ProcessCameraProvider processCameraProvider) {
         Preview preview = new Preview.Builder().build();
+
         CameraSelector cameraSelector = new CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_BACK).build();
+
         preview.setSurfaceProvider(previewView.getSurfaceProvider());
+
         ImageCapture imageCapture = new ImageCapture.Builder().build();
+
         ImageAnalysis imageAnalysis = new ImageAnalysis.Builder().setTargetResolution(new Size(1280 , 720))
                 .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST).build();
         imageAnalysis.setAnalyzer(cameraExecutor , analyzer);
+
         processCameraProvider.unbind();
+
         processCameraProvider.bindToLifecycle(this , cameraSelector , preview , imageCapture , imageAnalysis);
     }
 
@@ -149,6 +157,7 @@ public class HomeFragment extends Fragment {
             Image image1 = image.getImage();
             assert image1 != null;
             InputImage inputImage = InputImage.fromMediaImage(image1, image.getImageInfo().getRotationDegrees());
+
             //Filter: Loc anh co Barcode
             BarcodeScannerOptions options =
                     new BarcodeScannerOptions.Builder()

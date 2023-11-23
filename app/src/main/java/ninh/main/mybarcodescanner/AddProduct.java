@@ -15,13 +15,12 @@ import android.widget.Toast;
 
 import ninh.main.mybarcodescanner.sqlite.DBManager;
 import ninh.main.mybarcodescanner.sqlite.DatabaseHelper;
-import ninh.main.mybarcodescanner.sqlite.ProductListActivity;
 import ninh.main.mybarcodescanner.ui.home.HomeFragment;
 
 public class  AddProduct extends AppCompatActivity {
     EditText productName, productDetail;
     TextView productSeri;
-    Button addStorage; //THUA
+    Button addStorage;
     ImageButton remove,add;
     EditText productQuantity;
     Intent intent;
@@ -46,7 +45,6 @@ public class  AddProduct extends AppCompatActivity {
     private void init(){
         productName = findViewById(R.id.productTitle);
         productSeri = findViewById(R.id.productSeri);
-        productDetail = findViewById(R.id.productDetail);
         addStorage = findViewById(R.id.btnAdd);
         remove = findViewById(R.id.btnDecrease);
         add = findViewById(R.id.btnIncrease);
@@ -72,7 +70,7 @@ public class  AddProduct extends AppCompatActivity {
         String name = productName.getText().toString();
         dbManager.insert(seri, name, quantity);
         Toast.makeText(this, "ADD SUCCESSFULLY", Toast.LENGTH_SHORT).show();
-        Intent main = new Intent(this, ProductListActivity.class)
+        Intent main = new Intent(this, HomeFragment.class)
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(main);
         hideSoftKeyboard(this);
