@@ -86,13 +86,6 @@
                     android:textSize="25dp"
                     android:textStyle="italic" />
 
-                <TextView
-                    android:id="@+id/productDetail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:hint="Product Detail"
-                    android:textSize="20dp" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
