@@ -2,6 +2,7 @@ package ninh.main.mybarcodescanner.list;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import ninh.main.mybarcodescanner.Product;
 import ninh.main.mybarcodescanner.R;
 import ninh.main.mybarcodescanner.databinding.FragmentListBinding;
 import ninh.main.mybarcodescanner.sqlite.DBManager;
+import ninh.main.mybarcodescanner.sqlite.ModifyProductActivity;
 
 public class ListFragment extends Fragment {
     private FragmentListBinding binding;
@@ -33,10 +35,19 @@ public class ListFragment extends Fragment {
         binding = FragmentListBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         listView = root.findViewById(R.id.list);
+
         products = new ArrayList<>();
-        getData();
+        getData(); // Lay du lieu tu SQLite -> Cho vao products
         adapter = new ListAdapter(getActivity(),products,R.layout.fragment_list_list);
         listView.setAdapter(adapter);
+
+//        listView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent modify = new Intent(getActivity(), ModifyProductActivity.class);
+//                modify.putExtra("seri",);
+//            }
+//        });
         return root;
     }
 

@@ -107,27 +107,4 @@ public class DBManager {
 
     }
 
-//    public Cursor getData(String seri) {
-//        SQLiteDatabase db = dbHelper.getReadableDatabase();
-//        String selection = DatabaseHelper.Seri + " = ? ";
-//        String[] selectionArgs = {seri + " "};
-//
-//        try {
-//            Cursor data = db.query(DatabaseHelper.TABLE_NAME, null, selection, selectionArgs, null, null, null);
-//
-//            // Make sure there is data and move to the first row
-//            if (data != null) {
-//                data.moveToFirst();
-//            }
-//
-//            // Do not close the database connection here
-//
-//            return data;
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            // Close the database connection if an exception occurs
-//            db.close();
-//            return null;
-//        }
-//    }
 }
