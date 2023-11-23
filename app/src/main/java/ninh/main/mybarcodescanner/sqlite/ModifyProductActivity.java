@@ -95,11 +95,6 @@ public class ModifyProductActivity extends Activity{
         quantityText.setText(quantity+"");
     }
 
-    public void returnScanModify(View view) {
-        Intent home_intent = new Intent(getApplicationContext(), ProductListActivity.class)
-                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(home_intent);
-    }
 
     public void saveData(View view) {
         String nameProduct = nameProductText.getText().toString();
@@ -113,5 +108,11 @@ public class ModifyProductActivity extends Activity{
     public void deleteData(View view) {
         dbManager.delete(seri);
         this.returnScanModify(view);
+    }
+
+    public void returnScanModify(View view) {
+        Intent home_intent = new Intent(getApplicationContext(), ProductListActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(home_intent);
     }
 }
