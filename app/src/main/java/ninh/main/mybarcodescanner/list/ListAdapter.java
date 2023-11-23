@@ -1,6 +1,7 @@
 package ninh.main.mybarcodescanner;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import ninh.main.mybarcodescanner.sqlite.DBManager;
+import ninh.main.mybarcodescanner.sqlite.DatabaseHelper;
+import ninh.main.mybarcodescanner.sqlite.ModifyProductActivity;
 
 public class ListAdapter extends BaseAdapter {
     Context context;
@@ -66,6 +71,22 @@ public class ListAdapter extends BaseAdapter {
         holder.tvName.setText(name);
         holder.tvQuantity.setText(quantity);
 
+        holder.imgEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent modify = new Intent(context, ModifyProductActivity.class);
+                modify.putExtra(DatabaseHelper.Seri,seri);
+                context.startActivity(modify);
+            }
+        });
+
+        holder.imgDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DBManager db = new DBManager(context);
+                db.delete(seri);
+            }
+        });
         return convertView;
     }
 }

@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import ninh.main.mybarcodescanner.Product;
 import ninh.main.mybarcodescanner.R;
+import ninh.main.mybarcodescanner.ui.home.HomeFragment;
 
 public class ModifyProductActivity extends Activity{
     private TextView seriText;
@@ -111,7 +112,7 @@ public class ModifyProductActivity extends Activity{
     }
 
     public void returnScanModify(View view) {
-        Intent home_intent = new Intent(getApplicationContext(), ProductListActivity.class)
+        Intent home_intent = new Intent(getApplicationContext(), HomeFragment.class)
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(home_intent);
     }

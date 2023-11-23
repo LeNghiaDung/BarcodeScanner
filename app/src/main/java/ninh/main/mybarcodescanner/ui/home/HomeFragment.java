@@ -199,6 +199,7 @@ public class HomeFragment extends Fragment {
                 String rawValue = barcode.getRawValue();
 
                 String check = barcode.getRawValue();
+                check = check + " ";
 
                 if (dbManager.checkExisted(check)){
                     Intent productIntent = new Intent(getActivity(), ModifyProductActivity.class);

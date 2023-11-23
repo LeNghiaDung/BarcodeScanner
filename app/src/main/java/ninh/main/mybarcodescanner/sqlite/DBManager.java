@@ -54,7 +54,7 @@ public class DBManager {
     public int update(String _seri, String name, Integer quantity) {
         ContentValues contentValues = new ContentValues();
         String selection =  DatabaseHelper.Seri + " = ? ";
-        String[] selectionArgs = {_seri+ " "};
+        String[] selectionArgs = {_seri};
         contentValues.put(DatabaseHelper.NameProduct, name);
         contentValues.put(DatabaseHelper.Quantity, quantity);
         int i = database.update(DatabaseHelper.TABLE_NAME, contentValues, selection, selectionArgs);
@@ -70,7 +70,7 @@ public class DBManager {
     public boolean checkExisted(String seri) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String selection =  DatabaseHelper.Seri + " = ? ";
-        String[] selectionArgs = {seri+ " "};
+        String[] selectionArgs = {seri};
         Cursor data = database.query(DatabaseHelper.TABLE_NAME,null,selection,selectionArgs,null,null,null);
 
         boolean exists = data != null && data.getCount() > 0;
@@ -97,7 +97,7 @@ public class DBManager {
         Product product;
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String selection =  DatabaseHelper.Seri + " = ? ";
-        String[] selectionArgs = {seri+" "};
+        String[] selectionArgs = {seri};
         Cursor data = db.query(DatabaseHelper.TABLE_NAME,null,selection,selectionArgs,null,null,null);
 //        Cursor data = db.rawQuery("SELECT * FROM "+ DatabaseHelper.TABLE_NAME + " WHERE " + DatabaseHelper.Seri + " = " + seri,null);
         if (data != null){
