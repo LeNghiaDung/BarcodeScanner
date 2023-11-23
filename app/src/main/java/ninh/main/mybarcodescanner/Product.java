@@ -11,6 +11,11 @@ public class Product {
         this.quantity = quantity;
     }
 
+    public Product(String seri, String name) {
+        this.seri = seri;
+        this.nameProduct = name;
+    }
+
     public String getSeri() {
         return seri;
     }

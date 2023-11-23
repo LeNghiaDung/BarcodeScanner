@@ -13,7 +13,6 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
-import ninh.main.mybarcodescanner.ListAdapter;
 import ninh.main.mybarcodescanner.Product;
 import ninh.main.mybarcodescanner.R;
 import ninh.main.mybarcodescanner.databinding.FragmentListBinding;
