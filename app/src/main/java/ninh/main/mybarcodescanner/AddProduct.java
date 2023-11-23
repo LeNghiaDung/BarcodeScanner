@@ -18,7 +18,7 @@ import ninh.main.mybarcodescanner.sqlite.DatabaseHelper;
 import ninh.main.mybarcodescanner.ui.home.HomeFragment;
 
 public class  AddProduct extends AppCompatActivity {
-    EditText productName, productDetail;
+    EditText productName;
     TextView productSeri;
     Button addStorage;
     ImageButton remove,add;

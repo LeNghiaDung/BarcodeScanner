@@ -28,8 +28,6 @@ public class ModifyProductActivity extends Activity{
     ImageButton remove,add;
     private DBManager dbManager;
     private DatabaseHelper helper;
-    SQLiteDatabase sqLiteDatabase;
-    Product product;
     String seri;
     String name;
     int quantity = 0;
@@ -83,7 +81,7 @@ public class ModifyProductActivity extends Activity{
         }
     }
 
-    public void removeQuantity(View view) {
+    public void removeQuantityModify(View view) {
         if (quantity == 0){
             remove.setEnabled(false);
         } else {
@@ -92,8 +90,7 @@ public class ModifyProductActivity extends Activity{
             quantityText.setText(quantity+"");
         }
     }
-
-    public void addQuantity(View view) {
+    public void addQuantityModify(View view) {
         quantity +=5;
         quantityText.setText(quantity+"");
     }
@@ -102,7 +99,7 @@ public class ModifyProductActivity extends Activity{
     public void saveData(View view) {
         String nameProduct = nameProductText.getText().toString();
         long check = dbManager.update(seri, nameProduct, quantity);
-        if (check == 1){
+        if (check != 1){
             Toast.makeText(this, "Save Successfully", Toast.LENGTH_SHORT).show();
         }
         this.returnScanModify(view);
@@ -118,4 +115,5 @@ public class ModifyProductActivity extends Activity{
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(home_intent);
     }
+
 }

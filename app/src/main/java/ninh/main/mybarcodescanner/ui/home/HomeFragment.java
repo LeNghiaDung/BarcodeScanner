@@ -71,6 +71,7 @@ public class HomeFragment extends Fragment {
 
         //Khai bao DBManager
         dbManager = new DBManager(getActivity());
+        dbManager.open();
 
         // Activity = this / MainActivity.this
         // Fragment = getActivity();
@@ -136,6 +137,10 @@ public class HomeFragment extends Fragment {
 
         processCameraProvider.bindToLifecycle(this , cameraSelector , preview , imageCapture , imageAnalysis);
     }
+
+    public void openGallery(View view) {
+    }
+
 
     public class ImageAnalyzer implements ImageAnalysis.Analyzer {
         private FragmentManager fragmentManager;
@@ -208,9 +213,9 @@ public class HomeFragment extends Fragment {
                 String rawValue = barcode.getRawValue();
 
                 String check = barcode.getRawValue();
-                check = check + " ";
-
-                if (dbManager.checkExisted(check)){
+                boolean checkExisted = dbManager.checkExisted(check);
+                if (checkExisted){
+                    check = check + " ";
                     Intent productIntent = new Intent(getActivity(), ModifyProductActivity.class);
                     productIntent.putExtra(DatabaseHelper.Seri,check);
                     startActivity(productIntent);

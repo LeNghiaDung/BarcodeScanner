@@ -1,4 +1,4 @@
-package ninh.main.mybarcodescanner.bin;
+package ninh.main.mybarcodescanner;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,8 +11,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import ninh.main.mybarcodescanner.Product;
-import ninh.main.mybarcodescanner.R;
 import ninh.main.mybarcodescanner.sqlite.DBManager;
 
 public class BinAdapter extends BaseAdapter {
@@ -43,7 +41,7 @@ public class BinAdapter extends BaseAdapter {
 
     public class ViewHolder{
         ImageView imgProductBin;
-        TextView tvSeriBin, tvNameBin;
+        TextView tvSeriBin, tvNameBin, tvQuantityBin;
         ImageButton imgDeleteBin;
 
     }
@@ -56,6 +54,7 @@ public class BinAdapter extends BaseAdapter {
             convertView = inflater.inflate(layout,null);
             holder.imgProductBin = convertView.findViewById(R.id.imageProductBin);
             holder.tvSeriBin = convertView.findViewById(R.id.tvSeriBin);
+            holder.tvQuantityBin = convertView.findViewById(R.id.tvQuantityBin);
             holder.tvNameBin = convertView.findViewById(R.id.tvNameProductBin);
             holder.imgDeleteBin = convertView.findViewById(R.id.imgDeleteBin);
 
@@ -66,8 +65,10 @@ public class BinAdapter extends BaseAdapter {
         }
         String seri = products.get(position).getSeri();
         String name = products.get(position).getNameProduct();
+        String quantity = String.valueOf(products.get(position).getQuantity());
         holder.tvNameBin.setText(name);
         holder.tvSeriBin.setText(seri);
+        holder.tvQuantityBin.setText(quantity);
 
         holder.imgDeleteBin.setOnClickListener(new View.OnClickListener() {
             @Override

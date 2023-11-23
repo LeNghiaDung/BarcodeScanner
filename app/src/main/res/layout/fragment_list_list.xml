@@ -58,6 +58,7 @@
         android:contentDescription="Edit"
         android:src="@drawable/edit"
         tools:ignore="TouchTargetSizeCheck"
+        android:onClick="modifyProduct"
         android:layout_margin="5dp"/>
 
     <ImageButton
@@ -67,7 +68,7 @@
         android:layout_weight="1"
         android:background="@color/transparent"
         android:contentDescription="Delete"
-        android:onClick="click"
+        android:onClick="delete"
         android:src="@drawable/delete"
         tools:ignore="TouchTargetSizeCheck"
         android:layout_margin="5dp"/>

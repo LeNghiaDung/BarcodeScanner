@@ -41,7 +41,6 @@ public class DBManager {
     }
 
     public Cursor fetch() {
-        // Luu columns
         String[] columns = new String[] { DatabaseHelper.Seri, DatabaseHelper.NameProduct, DatabaseHelper.Quantity };
 
         Cursor cursor = database.query(DatabaseHelper.TABLE_NAME, columns, null, null, null, null, null);
@@ -63,19 +62,19 @@ public class DBManager {
 
     public void delete(String _seri) {
         String selection =  DatabaseHelper.Seri + " = ? ";
-        String[] selectionArgs = {_seri+ " "};
+        String[] selectionArgs = {_seri};
         database.delete(DatabaseHelper.TABLE_NAME, selection, selectionArgs);
+        Toast.makeText(context, "Delete Successfully", Toast.LENGTH_SHORT).show();
     }
 
     public boolean checkExisted(String seri) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String selection =  DatabaseHelper.Seri + " = ? ";
-        String[] selectionArgs = {seri};
+        String[] selectionArgs = {seri+ " "};
         Cursor data = database.query(DatabaseHelper.TABLE_NAME,null,selection,selectionArgs,null,null,null);
 
         boolean exists = data != null && data.getCount() > 0;
 
-        // Đóng cursor và kết nối đến cơ sở dữ liệu
         if (data != null) {
             data.close();
         }
