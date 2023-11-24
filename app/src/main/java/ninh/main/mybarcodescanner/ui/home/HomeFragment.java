@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment {
         //Khai bao DBManager
         dbManager = new DBManager(getActivity());
         dbManager.open();
-
+        dbManager.open();
         // Activity = this / MainActivity.this
         // Fragment = getActivity();
         previewView = root.findViewById(R.id.previewView);

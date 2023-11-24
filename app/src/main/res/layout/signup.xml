@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tvCreateAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="144dp"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/edUsernameCreate"
+        android:id="@+id/tvUsernameSU"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="64dp"
@@ -30,12 +30,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/tvCreateAccount"
         android:background="@drawable/sign_in_up_bg"
         android:padding="10dp"/>
 
     <EditText
-        android:id="@+id/edPasswordCreate"
+        android:id="@+id/tvPasswordSU"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
@@ -45,12 +45,12 @@
         android:hint="Password"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edUsernameCreate"
+        app:layout_constraintTop_toBottomOf="@+id/tvUsernameSU"
         android:background="@drawable/sign_in_up_bg"
         android:padding="10dp"/>
 
     <Button
-        android:id="@+id/btnSignInCreate"
+        android:id="@+id/btnSignUpSU"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
@@ -59,11 +59,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edPasswordCreate"
+        app:layout_constraintTop_toBottomOf="@+id/tvPasswordSU"
         android:background="@drawable/sign_in_up_btn_bg"/>
 
     <Button
-        android:id="@+id/btnSignUpCreate"
+        android:id="@+id/btnSignInSU"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -73,5 +73,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSignInCreate" />
+        app:layout_constraintTop_toBottomOf="@+id/btnSignUpSU" />
 </androidx.constraintlayout.widget.ConstraintLayout>
