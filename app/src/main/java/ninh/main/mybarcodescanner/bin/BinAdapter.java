@@ -22,6 +22,7 @@ public class BinAdapter extends BaseAdapter {
     Context context;
     ArrayList<Product> products;
     int layout;
+    String seri;
 
     public BinAdapter(Context context, ArrayList<Product> products, int layout) {
         this.context = context;
@@ -71,7 +72,7 @@ public class BinAdapter extends BaseAdapter {
         else{
             holder = (ViewHolder) convertView.getTag();
         }
-        String seri = products.get(position).getSeri();
+        seri = products.get(position).getSeri();
         String name = products.get(position).getNameProduct();
         String quantity = String.valueOf(products.get(position).getQuantity());
         holder.tvNameBin.setText(name);
@@ -81,10 +82,8 @@ public class BinAdapter extends BaseAdapter {
         holder.imgDeleteBin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context , "hehe" , Toast.LENGTH_SHORT).show();
                 Intent modify_bin = new Intent(context, ModifyBin.class);
                 modify_bin.putExtra(DatabaseHelper.Seri,seri);
-                modify_bin.putExtra(DatabaseHelper.NameProduct,name);
                 context.startActivity(modify_bin);
             }
         });

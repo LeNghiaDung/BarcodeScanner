@@ -55,11 +55,10 @@ public class ModifyBin extends Activity {
     }
 
     public void getData(){
-        try (Cursor data = dbManager.getData(seri)) {
-            if (data != null && data.moveToFirst()) {
+        try (Cursor data = dbManager.getData_bin(seri)) {
+            if (data != null && data.moveToNext()) {
                 // Check if the Cursor has data and move to the first row
                 Toast.makeText(this, "Existed", Toast.LENGTH_SHORT).show();
-
                 // Retrieve data from the Cursor
                 name = data.getString(1);
                 quantity = data.getInt(2);
@@ -96,6 +95,7 @@ public class ModifyBin extends Activity {
         String name = nameProductText_bin.getText().toString();
         dbManager.insert(seri, name, quantity);
         Toast.makeText(this, "ADD SUCCESSFULLY", Toast.LENGTH_SHORT).show();
+        dbManager.delete_bin(seri);
         this.returnScanModify_bin(view);
     }
 
