@@ -28,10 +28,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Creating table query
 
     private static final String CREATE_TABLE = "create table " + TABLE_NAME + "(" + Seri
-            + " TEXT NOT NULL , " + NameProduct + " TEXT NOT NULL, " + Quantity + " INTEGER NOT NULL);";
+            + " TEXT PRIMARY KEY , " + NameProduct + " TEXT NOT NULL, " + Quantity + " INTEGER NOT NULL);";
 
     private static final String CREATE_TABLE_BIN = "create table " + TABLE_NAME_BIN + "(" + Seri
-            + " TEXT NOT NULL , " + NameProduct + " TEXT NOT NULL, " + Quantity + " INTEGER NOT NULL);";
+            + " TEXT PRIMARY KEY , " + NameProduct + " TEXT NOT NULL, " + Quantity + " INTEGER NOT NULL);";
 
     //CONTRUCTOR
     public DatabaseHelper(Context context) {

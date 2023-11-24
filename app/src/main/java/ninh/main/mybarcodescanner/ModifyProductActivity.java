@@ -106,12 +106,9 @@ public class ModifyProductActivity extends Activity{
     }
 
     public void deleteData(View view) {
-        Toast.makeText(ModifyProductActivity.this , "hihi" , Toast.LENGTH_SHORT).show();
         String seri = seriText.getText().toString();
         String name = nameProductText.getText().toString();
         dbManager.insert_bin(seri, name, quantity);
-
-        Toast.makeText(ModifyProductActivity.this , "hehe" , Toast.LENGTH_SHORT).show();
 
         dbManager.delete(seri);
         this.returnScanModify(view);

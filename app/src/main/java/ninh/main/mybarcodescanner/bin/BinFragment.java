@@ -36,7 +36,6 @@ public class BinFragment extends Fragment {
         getDataBin();
         adapter = new BinAdapter(getActivity(),products,R.layout.fragment_bin);
         listView.setAdapter(adapter);
-        products.add(new Product("033432020203" , "bàn" , 10));
 
         return root;
     }

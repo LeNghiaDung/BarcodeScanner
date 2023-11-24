@@ -126,29 +126,27 @@ public class DBManager {
         return null;
     }
     public Cursor getData(String seri){
-        Product product;
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String selection =  DatabaseHelper.Seri + " = ? ";
         String[] selectionArgs = {seri};
         Cursor data = db.query(DatabaseHelper.TABLE_NAME,null,selection,selectionArgs,null,null,null);
 //        Cursor data = db.rawQuery("SELECT * FROM "+ DatabaseHelper.TABLE_NAME + " WHERE " + DatabaseHelper.Seri + " = " + seri,null);
         if (data != null){
-            data.moveToNext();
+            return data;
         }
-        return data;
+        return null;
     }
 
     public Cursor getData_bin(String seri){
-        Product product;
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String selection =  DatabaseHelper.Seri + " = ? ";
         String[] selectionArgs = {seri};
         Cursor data = db.query(DatabaseHelper.TABLE_NAME_BIN,null,selection,selectionArgs,null,null,null);
 //        Cursor data = db.rawQuery("SELECT * FROM "+ DatabaseHelper.TABLE_NAME + " WHERE " + DatabaseHelper.Seri + " = " + seri,null);
         if (data != null){
-            data.moveToNext();
+            return data;
         }
-        return data;
+        return null;
     }
 
 }
