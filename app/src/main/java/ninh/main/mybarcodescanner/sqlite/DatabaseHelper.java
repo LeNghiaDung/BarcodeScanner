@@ -10,6 +10,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Table Name
     public static final String TABLE_NAME = "PRODUCTS";
+    public static final String TABLE_NAME_BIN = "PRODUCTS_BIN";
 
     // Table columns
     public static final String Seri = "_seri";
@@ -17,7 +18,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String Quantity = "quantity";
 
     // Database Information
-    static final String DB_NAME = "PRODUCTS.DB";
+    static final String DB_NAME2 = "PRODUCTS.DB2";
 
     // database version
     static final int DB_VERSION = 1;
@@ -29,10 +30,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String CREATE_TABLE = "create table " + TABLE_NAME + "(" + Seri
             + " TEXT PRIMARY KEY , " + NameProduct + " TEXT NOT NULL, " + Quantity + " INTEGER NOT NULL);";
 
+    private static final String CREATE_TABLE_BIN = "create table " + TABLE_NAME_BIN + "(" + Seri
+            + " TEXT PRIMARY KEY , " + NameProduct + " TEXT NOT NULL, " + Quantity + " INTEGER NOT NULL);";
+
     //CONTRUCTOR
     public DatabaseHelper(Context context) {
 
-        super(context, DB_NAME, null, DB_VERSION);
+        super(context, DB_NAME2, null, DB_VERSION);
     }
 
     //TAO BANG PRODUCTS
@@ -40,11 +44,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         db.execSQL(CREATE_TABLE);
+        db.execSQL(CREATE_TABLE_BIN);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_BIN);
         onCreate(db);
     }
 

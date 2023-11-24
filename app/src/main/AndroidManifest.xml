@@ -32,7 +32,7 @@
             android:windowSoftInputMode="adjustResize" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.home.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.MyBarcodeScanner.NoActionBar">
@@ -47,15 +47,20 @@
             android:name=".ModifyProductActivity"
             android:exported="false" />
 
-        <activity android:name="ninh.main.mybarcodescanner.SignIn"
+        <activity
+            android:name=".ModifyBin"
+            android:exported="false" />
+
+        <activity android:name="ninh.main.mybarcodescanner.user.SignIn"
             android:exported="true">
 
         </activity>
 
-        <activity android:name=".SignIn"
+        <activity android:name=".user.SignIn"
             android:exported="true">
 
         </activity>
+
     </application>
 
 </manifest>

@@ -40,10 +40,27 @@ public class DBManager {
         database.insert(DatabaseHelper.TABLE_NAME, null, contentValue);
     }
 
+    public void insert_bin( String seri, String name, Integer quantity) {
+        ContentValues contentValue2 = new ContentValues(); //KHOI TAO
+        contentValue2.put(DatabaseHelper.Seri, seri);
+        contentValue2.put(DatabaseHelper.NameProduct, name);
+        contentValue2.put(DatabaseHelper.Quantity, quantity);
+        database.insert(DatabaseHelper.TABLE_NAME_BIN, null, contentValue2);
+    }
+
     public Cursor fetch() {
         String[] columns = new String[] { DatabaseHelper.Seri, DatabaseHelper.NameProduct, DatabaseHelper.Quantity };
 
         Cursor cursor = database.query(DatabaseHelper.TABLE_NAME, columns, null, null, null, null, null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+        return cursor;
+    }
+    public Cursor fetch1() {
+        String[] columns = new String[] { DatabaseHelper.Seri, DatabaseHelper.NameProduct, DatabaseHelper.Quantity };
+
+        Cursor cursor = database.query(DatabaseHelper.TABLE_NAME_BIN, columns, null, null, null, null, null);
         if (cursor != null) {
             cursor.moveToFirst();
         }
@@ -64,6 +81,13 @@ public class DBManager {
         String selection =  DatabaseHelper.Seri + " = ? ";
         String[] selectionArgs = {_seri};
         database.delete(DatabaseHelper.TABLE_NAME, selection, selectionArgs);
+        Toast.makeText(context, "Delete Successfully", Toast.LENGTH_SHORT).show();
+    }
+
+    public void delete_bin(String _seri) {
+        String selection =  DatabaseHelper.Seri + " = ? ";
+        String[] selectionArgs = {_seri};
+        database.delete(DatabaseHelper.TABLE_NAME_BIN, selection, selectionArgs);
         Toast.makeText(context, "Delete Successfully", Toast.LENGTH_SHORT).show();
     }
 
@@ -92,6 +116,15 @@ public class DBManager {
         }
         return null;
     }
+
+    public Cursor getAllData_bin(){
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor data = db.query(DatabaseHelper.TABLE_NAME_BIN,null,null,null,null,null,null);
+        if (data != null ){
+            data.moveToNext();
+        }
+        return data;
+    }
     public Cursor getData(String seri){
         Product product;
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -103,7 +136,19 @@ public class DBManager {
             data.moveToNext();
         }
         return data;
+    }
 
+    public Cursor getData_bin(String seri){
+        Product product;
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String selection =  DatabaseHelper.Seri + " = ? ";
+        String[] selectionArgs = {seri};
+        Cursor data = db.query(DatabaseHelper.TABLE_NAME_BIN,null,selection,selectionArgs,null,null,null);
+//        Cursor data = db.rawQuery("SELECT * FROM "+ DatabaseHelper.TABLE_NAME + " WHERE " + DatabaseHelper.Seri + " = " + seri,null);
+        if (data != null){
+            data.moveToNext();
+        }
+        return data;
     }
 
 }

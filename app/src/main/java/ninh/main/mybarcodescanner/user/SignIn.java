@@ -1,10 +1,12 @@
-package ninh.main.mybarcodescanner;
+package ninh.main.mybarcodescanner.user;
 
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import ninh.main.mybarcodescanner.R;
 
 public class SignIn extends AppCompatActivity {
     @Override

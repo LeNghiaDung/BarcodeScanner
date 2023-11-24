@@ -1,6 +1,7 @@
-package ninh.main.mybarcodescanner;
+package ninh.main.mybarcodescanner.bin;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,10 +9,14 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import ninh.main.mybarcodescanner.sqlite.DBManager;
+import ninh.main.mybarcodescanner.ModifyBin;
+import ninh.main.mybarcodescanner.Product;
+import ninh.main.mybarcodescanner.R;
+import ninh.main.mybarcodescanner.sqlite.DatabaseHelper;
 
 public class BinAdapter extends BaseAdapter {
     Context context;
@@ -26,16 +31,19 @@ public class BinAdapter extends BaseAdapter {
     @Override
 
     public int getCount() {
+
         return products.size();
     }
 
     @Override
     public Object getItem(int position) {
+
         return null;
     }
 
     @Override
     public long getItemId(int position) {
+
         return 0;
     }
 
@@ -73,8 +81,11 @@ public class BinAdapter extends BaseAdapter {
         holder.imgDeleteBin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DBManager db = new DBManager(context);
-                db.delete(seri);
+                Toast.makeText(context , "hehe" , Toast.LENGTH_SHORT).show();
+                Intent modify_bin = new Intent(context, ModifyBin.class);
+                modify_bin.putExtra(DatabaseHelper.Seri,seri);
+                modify_bin.putExtra(DatabaseHelper.NameProduct,name);
+                context.startActivity(modify_bin);
             }
         });
         return convertView;

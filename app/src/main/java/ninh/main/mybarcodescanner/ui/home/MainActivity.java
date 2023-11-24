@@ -1,4 +1,4 @@
-package ninh.main.mybarcodescanner;
+package ninh.main.mybarcodescanner.ui.home;
 
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +15,7 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
+import ninh.main.mybarcodescanner.R;
 import ninh.main.mybarcodescanner.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {

@@ -63,7 +63,6 @@
         android:layout_weight="1"
         android:background="@color/transparent"
         android:contentDescription="deletefrv"
-        android:onClick="clickDelete"
         android:src="@drawable/deletefoever"
         android:layout_margin="10dp"
         tools:ignore="TouchTargetSizeCheck" />
