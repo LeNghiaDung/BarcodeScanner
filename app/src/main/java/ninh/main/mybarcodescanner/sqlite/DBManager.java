@@ -121,9 +121,9 @@ public class DBManager {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor data = db.query(DatabaseHelper.TABLE_NAME_BIN,null,null,null,null,null,null);
         if (data != null ){
-            data.moveToNext();
+            return data;
         }
-        return data;
+        return null;
     }
     public Cursor getData(String seri){
         Product product;

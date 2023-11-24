@@ -23,6 +23,7 @@ public class ListAdapter extends BaseAdapter {
     Context context;
     ArrayList<Product> products;
     int layout;
+    String seri;
 
     public ListAdapter(Context context, ArrayList<Product> products, int layout) {
         this.context = context;
@@ -67,7 +68,7 @@ public class ListAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        String seri = products.get(position).getSeri();
+        seri = products.get(position).getSeri();
         String name = products.get(position).getNameProduct();
         String quantity = String.valueOf(products.get(position).getQuantity());
         holder.tvSeri.setText(seri);
