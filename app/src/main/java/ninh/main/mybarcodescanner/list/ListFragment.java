@@ -37,7 +37,6 @@ public class ListFragment extends Fragment {
         getData();
         adapter = new ListAdapter(getActivity(),products,R.layout.fragment_list_list);
         listView.setAdapter(adapter);
-
         return root;
 
     }
@@ -50,7 +49,8 @@ public class ListFragment extends Fragment {
             String seri = data.getString(0);
             String name = data.getString(1);
             int quantity = data.getInt(2);
-            products.add(new Product(seri,name,quantity));
+            String date = data.getString(3);
+            products.add(new Product(seri,name,quantity,date));
         }
     }
 }

@@ -68,7 +68,7 @@ android:padding="10dp" >
             android:layout_margin="10dp"
             android:orientation="vertical">
 
-            <EditText
+            <TextView
                 android:id="@+id/nameProduct_edittext_bin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -85,6 +85,16 @@ android:padding="10dp" >
                 android:hint="Product Seri"
                 android:textSize="25dp"
                 android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/tvDateModifyBin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:hint="Date HH:mm - dd/MM/yyyy"
+                android:textSize="15dp"
+                android:textStyle="italic"
+                tools:ignore="TextSizeCheck" />
 
         </LinearLayout>
         <LinearLayout
@@ -115,7 +125,7 @@ android:padding="10dp" >
                     android:src="@drawable/baseline_remove_24"
                     tools:ignore="TouchTargetSizeCheck" />
 
-                <EditText
+                <TextView
                     android:id="@+id/quantity_edittext_bin"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
@@ -125,6 +135,7 @@ android:padding="10dp" >
                     android:inputType="number"
                     android:minHeight="48dp"
                     android:textAlignment="center"
+                    android:padding="20dp"
                     tools:ignore="TouchTargetSizeCheck" />
 
                 <ImageButton
@@ -145,9 +156,9 @@ android:padding="10dp" >
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/margin"
-                android:onClick="khoiPhuc"
                 android:background="@drawable/btnbackground"
-                android:text="Khôi phục" />
+                android:onClick="khoiPhuc"
+                android:text="Restore" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

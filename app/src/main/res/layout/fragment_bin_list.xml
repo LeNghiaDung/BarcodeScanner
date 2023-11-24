@@ -12,7 +12,7 @@
         android:id="@+id/listBin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="LinearLayoutManager"
-        tools:listitem="@layout/fragment_bin" />
+        tools:listitem="@layout/fragment_bin"
+        app:layoutManager="LinearLayoutManager"/>
 </LinearLayout>
 

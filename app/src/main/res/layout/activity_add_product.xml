@@ -71,6 +71,15 @@
                     android:hint="Product Seri"
                     android:textSize="20dp"
                     android:textStyle="italic" />
+                <TextView
+                    android:id="@+id/tvDateAdd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:hint="Date HH:mm - dd/MM/yyyy"
+                    android:textSize="15dp"
+                    android:textStyle="italic"
+                    tools:ignore="TextSizeCheck" />
 
             </LinearLayout>
 

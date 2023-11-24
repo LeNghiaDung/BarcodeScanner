@@ -6,8 +6,6 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
-    //CREATE TABLE && UPGRADE
-
     // Table Name
     public static final String TABLE_NAME = "PRODUCTS";
     public static final String TABLE_NAME_BIN = "PRODUCTS_BIN";
@@ -16,9 +14,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String Seri = "_seri";
     public static final String NameProduct = "nameProduct";
     public static final String Quantity = "quantity";
+    public static final String Date = "date";
 
     // Database Information
-    static final String DB_NAME2 = "PRODUCTS.DB2";
+    static final String DB_NAME = "PRODUCTS.DB";
 
     // database version
     static final int DB_VERSION = 1;
@@ -28,15 +27,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Creating table query
 
     private static final String CREATE_TABLE = "create table " + TABLE_NAME + "(" + Seri
-            + " TEXT PRIMARY KEY , " + NameProduct + " TEXT NOT NULL, " + Quantity + " INTEGER NOT NULL);";
+            + " TEXT PRIMARY KEY , " + NameProduct + " TEXT NOT NULL, " + Quantity + " INTEGER NOT NULL,"+Date+" TEXT NOT NULL);";
 
     private static final String CREATE_TABLE_BIN = "create table " + TABLE_NAME_BIN + "(" + Seri
-            + " TEXT PRIMARY KEY , " + NameProduct + " TEXT NOT NULL, " + Quantity + " INTEGER NOT NULL);";
+            + " TEXT PRIMARY KEY , " + NameProduct + " TEXT NOT NULL, " + Quantity + " INTEGER NOT NULL,"+Date+" TEXT NOT NULL);";
 
     //CONTRUCTOR
     public DatabaseHelper(Context context) {
 
-        super(context, DB_NAME2, null, DB_VERSION);
+        super(context, DB_NAME, null, DB_VERSION);
     }
 
     //TAO BANG PRODUCTS

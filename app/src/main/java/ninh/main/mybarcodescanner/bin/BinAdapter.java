@@ -22,7 +22,6 @@ public class BinAdapter extends BaseAdapter {
     Context context;
     ArrayList<Product> products;
     int layout;
-    String seri;
 
     public BinAdapter(Context context, ArrayList<Product> products, int layout) {
         this.context = context;
@@ -50,7 +49,7 @@ public class BinAdapter extends BaseAdapter {
 
     public class ViewHolder{
         ImageView imgProductBin;
-        TextView tvSeriBin, tvNameBin, tvQuantityBin;
+        TextView tvSeriBin, tvNameBin, tvQuantityBin, tvDateBin;
         ImageButton imgDeleteBin;
 
     }
@@ -64,6 +63,7 @@ public class BinAdapter extends BaseAdapter {
             holder.imgProductBin = convertView.findViewById(R.id.imageProductBin);
             holder.tvSeriBin = convertView.findViewById(R.id.tvSeriBin);
             holder.tvQuantityBin = convertView.findViewById(R.id.tvQuantityBin);
+            holder.tvDateBin = convertView.findViewById(R.id.tvDateBin);
             holder.tvNameBin = convertView.findViewById(R.id.tvNameProductBin);
             holder.imgDeleteBin = convertView.findViewById(R.id.imgDeleteBin);
 
@@ -72,12 +72,14 @@ public class BinAdapter extends BaseAdapter {
         else{
             holder = (ViewHolder) convertView.getTag();
         }
-        seri = products.get(position).getSeri();
+        String seri = products.get(position).getSeri();
         String name = products.get(position).getNameProduct();
         String quantity = String.valueOf(products.get(position).getQuantity());
+        String date = products.get(position).getDate();
         holder.tvNameBin.setText(name);
         holder.tvSeriBin.setText(seri);
         holder.tvQuantityBin.setText(quantity);
+        holder.tvDateBin.setText(date);
 
         holder.imgDeleteBin.setOnClickListener(new View.OnClickListener() {
             @Override

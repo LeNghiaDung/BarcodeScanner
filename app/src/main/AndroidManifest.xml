@@ -25,6 +25,12 @@
             android:name="com.google.mlkit.vision.DEPENDENCIES"
             android:value="barcode" />
 
+        <activity android:name=".SignInUp.SignIn"
+            android:exported="true">
+        </activity>
+
+        <activity android:name=".SignInUp.SignUp"
+            android:exported="false"/>
         <activity
             android:name=".AddProduct"
             android:exported="false"
@@ -32,25 +38,22 @@
             android:windowSoftInputMode="adjustResize" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.home.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.MyBarcodeScanner.NoActionBar">
-
-        </activity>
-
-        <activity
-            android:name=".ModifyProductActivity"
-            android:exported="false" />
-
-        <activity android:name="ninh.main.mybarcodescanner.SignIn"
-            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ModifyProductActivity"
+            android:exported="false" />
+        <activity android:name=".ModifyBin"
+            android:exported="false"/>
 
     </application>
 

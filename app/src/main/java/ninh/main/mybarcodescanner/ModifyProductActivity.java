@@ -1,6 +1,7 @@
 package ninh.main.mybarcodescanner;
 
 import android.app.Activity;
+import android.app.ListFragment;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,6 +14,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import ninh.main.mybarcodescanner.Product;
 import ninh.main.mybarcodescanner.R;
 import ninh.main.mybarcodescanner.sqlite.DBManager;
@@ -20,7 +24,7 @@ import ninh.main.mybarcodescanner.sqlite.DatabaseHelper;
 import ninh.main.mybarcodescanner.ui.home.HomeFragment;
 
 public class ModifyProductActivity extends Activity{
-    private TextView seriText;
+    private TextView seriText, dateText;
     private EditText nameProductText;
     private Button saveBtn;
     private ImageButton deleteBtn;
@@ -31,6 +35,7 @@ public class ModifyProductActivity extends Activity{
     String seri;
     String name;
     int quantity = 0;
+    String date;
 
 
     @Override
@@ -50,6 +55,7 @@ public class ModifyProductActivity extends Activity{
     }
     private void init(){
         seriText = findViewById(R.id.seri_edittext);
+        dateText = findViewById(R.id.tvDateModify);
         nameProductText =  findViewById(R.id.nameProduct_edittext);
         quantityText = findViewById(R.id.quantity_edittext);
         saveBtn = (Button) findViewById(R.id.btn_save);
@@ -68,10 +74,13 @@ public class ModifyProductActivity extends Activity{
                 // Retrieve data from the Cursor
                 name = data.getString(1);
                 quantity = data.getInt(2);
+                date = data.getString(3);
 
                 // Set the values to the corresponding views
                 nameProductText.setText(name);
                 quantityText.setText(String.valueOf(quantity));
+                dateText.setText(date);
+
             } else {
                 Toast.makeText(this, "No data found", Toast.LENGTH_SHORT).show();
             }
@@ -108,14 +117,24 @@ public class ModifyProductActivity extends Activity{
     public void deleteData(View view) {
         String seri = seriText.getText().toString();
         String name = nameProductText.getText().toString();
-        dbManager.insert_bin(seri, name, quantity);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm' - 'dd.MM.yyyy");
+        String date = sdf.format(new Date());
+
+        dbManager.insert_bin(seri, name, quantity,date);
 
         dbManager.delete(seri);
-        this.returnScanModify(view);
+        this.returnList(view);
     }
 
     public void returnScanModify(View view) {
         Intent home_intent = new Intent(getApplicationContext(), HomeFragment.class)
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(home_intent);
+    }
+
+    public void returnList(View view) {
+        Intent home_intent = new Intent(getApplicationContext(), ListFragment.class)
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(home_intent);
     }

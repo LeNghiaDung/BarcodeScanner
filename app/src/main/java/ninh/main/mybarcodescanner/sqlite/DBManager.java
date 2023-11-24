@@ -7,6 +7,9 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import ninh.main.mybarcodescanner.Product;
 
 public class DBManager {
@@ -32,39 +35,23 @@ public class DBManager {
         dbHelper.close();
     }
 
-    public void insert( String seri, String name, Integer quantity) {
+    public void insert( String seri, String name, Integer quantity,String date) {
         ContentValues contentValue = new ContentValues(); //KHOI TAO
         contentValue.put(DatabaseHelper.Seri, seri);
         contentValue.put(DatabaseHelper.NameProduct, name);
         contentValue.put(DatabaseHelper.Quantity, quantity);
+        contentValue.put(DatabaseHelper.Date,date);
+
         database.insert(DatabaseHelper.TABLE_NAME, null, contentValue);
     }
 
-    public void insert_bin( String seri, String name, Integer quantity) {
+    public void insert_bin( String seri, String name, Integer quantity,String date) {
         ContentValues contentValue2 = new ContentValues(); //KHOI TAO
         contentValue2.put(DatabaseHelper.Seri, seri);
         contentValue2.put(DatabaseHelper.NameProduct, name);
         contentValue2.put(DatabaseHelper.Quantity, quantity);
+        contentValue2.put(DatabaseHelper.Date,date);
         database.insert(DatabaseHelper.TABLE_NAME_BIN, null, contentValue2);
-    }
-
-    public Cursor fetch() {
-        String[] columns = new String[] { DatabaseHelper.Seri, DatabaseHelper.NameProduct, DatabaseHelper.Quantity };
-
-        Cursor cursor = database.query(DatabaseHelper.TABLE_NAME, columns, null, null, null, null, null);
-        if (cursor != null) {
-            cursor.moveToFirst();
-        }
-        return cursor;
-    }
-    public Cursor fetch1() {
-        String[] columns = new String[] { DatabaseHelper.Seri, DatabaseHelper.NameProduct, DatabaseHelper.Quantity };
-
-        Cursor cursor = database.query(DatabaseHelper.TABLE_NAME_BIN, columns, null, null, null, null, null);
-        if (cursor != null) {
-            cursor.moveToFirst();
-        }
-        return cursor;
     }
 
     public int update(String _seri, String name, Integer quantity) {
@@ -73,6 +60,10 @@ public class DBManager {
         String[] selectionArgs = {_seri};
         contentValues.put(DatabaseHelper.NameProduct, name);
         contentValues.put(DatabaseHelper.Quantity, quantity);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm' - 'dd.MM.yyyy");
+        String currentDateandTime = sdf.format(new Date());
+        contentValues.put(DatabaseHelper.Date,currentDateandTime);
         int i = database.update(DatabaseHelper.TABLE_NAME, contentValues, selection, selectionArgs);
         return i;
     }

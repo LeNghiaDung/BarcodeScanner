@@ -48,7 +48,6 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_alignParentStart="true"
-                    android:layout_alignParentLeft="true"
                     android:layout_marginStart="20dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
@@ -85,6 +84,15 @@
                     android:hint="Product Seri"
                     android:textSize="25dp"
                     android:textStyle="italic" />
+                <TextView
+                    android:id="@+id/tvDateModify"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:hint="Date HH:mm - dd/MM/yyyy"
+                    android:textSize="15dp"
+                    android:textStyle="italic"
+                    tools:ignore="TextSizeCheck" />
 
             </LinearLayout>
             <LinearLayout

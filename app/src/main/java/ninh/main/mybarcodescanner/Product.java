@@ -4,11 +4,13 @@ public class Product {
     private String seri;
     private String nameProduct;
     private int quantity;
+    private String date;
 
-    public Product(String seri, String nameProduct, int quantity) {
+    public Product(String seri, String nameProduct, int quantity,String date) {
         this.seri = seri;
         this.nameProduct = nameProduct;
         this.quantity = quantity;
+        this.date = date;
     }
 
     public String getSeri() {
@@ -33,5 +35,13 @@ public class Product {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

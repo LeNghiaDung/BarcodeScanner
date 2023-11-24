@@ -47,7 +47,8 @@ public class BinFragment extends Fragment {
             String seri = data.getString(0);
             String name = data.getString(1);
             int quantity = data.getInt(2);
-            products.add(new Product(seri,name,quantity));
+            String date = data.getString(3);
+            products.add(new Product(seri,name,quantity,date));
         }
     }
 }

@@ -7,7 +7,7 @@
     android:layout_margin = "@dimen/margin"
     android:gravity="center"
     android:orientation="horizontal"
-    android:background="@drawable/btnbackground">
+    android:background="@drawable/background_border">
 
 
     <ImageView
@@ -29,17 +29,15 @@
             android:id="@+id/tvSeriBin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
             android:text="Seri"
-            android:textStyle="bold"
             android:textAppearance="?attr/textAppearanceListItem"
-            android:textSize="@dimen/textSize" />
+            android:textSize="@dimen/textSize"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvNameProductBin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
             android:text="Name Product"
             android:textAppearance="?attr/textAppearanceListItem"
             android:textSize="@dimen/textSize" />
@@ -48,10 +46,20 @@
             android:id="@+id/tvQuantityBin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
             android:text="Quantity"
             android:textAppearance="?attr/textAppearanceListItem"
             android:textSize="15dp"
+            tools:ignore="TextSizeCheck" />
+
+        <TextView
+            android:id="@+id/tvDateBin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="hh:mm - dd/mm/yyyy"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textSize="15dp"
+            android:layout_marginTop="5dp"
+            android:textStyle="italic"
             tools:ignore="TextSizeCheck" />
 
     </LinearLayout>
@@ -63,7 +71,7 @@
         android:layout_weight="1"
         android:background="@color/transparent"
         android:contentDescription="deletefrv"
-        android:src="@drawable/deletefoever"
+        android:src="@drawable/undo"
         android:layout_margin="10dp"
         tools:ignore="TouchTargetSizeCheck" />
 

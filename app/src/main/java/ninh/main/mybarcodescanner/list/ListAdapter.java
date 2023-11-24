@@ -23,7 +23,6 @@ public class ListAdapter extends BaseAdapter {
     Context context;
     ArrayList<Product> products;
     int layout;
-    String seri;
 
     public ListAdapter(Context context, ArrayList<Product> products, int layout) {
         this.context = context;
@@ -47,8 +46,8 @@ public class ListAdapter extends BaseAdapter {
     }
     public class ViewHolder{
         ImageView imgProduct;
-        TextView tvSeri, tvName, tvQuantity;
-        ImageButton imgEdit, imgDelete;
+        TextView tvSeri, tvName, tvQuantity,tvDate;
+        ImageButton imgEdit;
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -60,20 +59,22 @@ public class ListAdapter extends BaseAdapter {
             holder.imgProduct = convertView.findViewById(R.id.imageProduct);
             holder.tvSeri = convertView.findViewById(R.id.tvSeri);
             holder.tvName = convertView.findViewById(R.id.tvNameProduct);
+            holder.tvDate = convertView.findViewById(R.id.tvDateProduct);
             holder.tvQuantity = convertView.findViewById(R.id.tvQuantityProduct);
             holder.imgEdit = convertView.findViewById(R.id.imgEdit);
-            holder.imgDelete = convertView.findViewById(R.id.imgDelete);
 
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        seri = products.get(position).getSeri();
+        String seri = products.get(position).getSeri();
         String name = products.get(position).getNameProduct();
         String quantity = String.valueOf(products.get(position).getQuantity());
+        String date = products.get(position).getDate();
         holder.tvSeri.setText(seri);
         holder.tvName.setText(name);
         holder.tvQuantity.setText(quantity);
+        holder.tvDate.setText(date);
 
         holder.imgEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,14 +82,6 @@ public class ListAdapter extends BaseAdapter {
                 Intent modify = new Intent(context, ModifyProductActivity.class);
                 modify.putExtra(DatabaseHelper.Seri,seri);
                 context.startActivity(modify);
-            }
-        });
-
-        holder.imgDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DBManager db = new DBManager(context);
-                db.delete(seri);
             }
         });
         return convertView;

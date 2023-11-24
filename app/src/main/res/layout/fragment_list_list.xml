@@ -19,13 +19,13 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:layout_margin="5dp"
         android:layout_weight="10">
 
         <TextView
             android:id="@+id/tvSeri"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
             android:text="Seri"
             android:textStyle="bold"
             android:textAppearance="?attr/textAppearanceListItem"
@@ -35,7 +35,6 @@
             android:id="@+id/tvNameProduct"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
             android:text="Name Product"
             android:textAppearance="?attr/textAppearanceListItem"
             android:textSize="@dimen/textSize" />
@@ -43,10 +42,19 @@
             android:id="@+id/tvQuantityProduct"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
             android:text="Quantity"
             android:textAppearance="?attr/textAppearanceListItem"
-            android:textSize="@dimen/textSize" />
+            android:textSize="15dp" />
+        <TextView
+            android:id="@+id/tvDateProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="hh:mm - dd/mm/yyyy"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textSize="15dp"
+            android:layout_marginTop="5dp"
+            android:textStyle="italic"
+            tools:ignore="TextSizeCheck" />
     </LinearLayout>
 
     <ImageButton
@@ -59,18 +67,6 @@
         android:src="@drawable/edit"
         tools:ignore="TouchTargetSizeCheck"
         android:onClick="modifyProduct"
-        android:layout_margin="5dp"/>
-
-    <ImageButton
-        android:id="@+id/imgDelete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:background="@color/transparent"
-        android:contentDescription="Delete"
-        android:onClick="delete"
-        android:src="@drawable/delete"
-        tools:ignore="TouchTargetSizeCheck"
         android:layout_margin="5dp"/>
 
 </LinearLayout>

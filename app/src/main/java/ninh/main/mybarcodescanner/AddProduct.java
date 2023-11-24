@@ -13,6 +13,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import ninh.main.mybarcodescanner.sqlite.DBManager;
 import ninh.main.mybarcodescanner.sqlite.DatabaseHelper;
 import ninh.main.mybarcodescanner.ui.home.HomeFragment;
@@ -68,7 +71,10 @@ public class  AddProduct extends AppCompatActivity {
     public void addToDatabase(View view) {
         String seri = productSeri.getText().toString();
         String name = productName.getText().toString();
-        dbManager.insert(seri, name, quantity);
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm' - 'dd.MM.yyyy");
+        String date = sdf.format(new Date());
+
+        dbManager.insert(seri, name, quantity,date);
         Toast.makeText(this, "ADD SUCCESSFULLY", Toast.LENGTH_SHORT).show();
         Intent main = new Intent(this, HomeFragment.class)
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
