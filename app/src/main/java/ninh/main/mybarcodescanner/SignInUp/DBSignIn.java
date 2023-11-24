@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 public class DBSignIn extends SQLiteOpenHelper {
     public static final String DB_Name = "User.DB";
     public static final String TABLE_NAME = "User";
-
+    // aaaaaa
     public static final String UserName = "userName";
     public static final String Password = "passWord";
 

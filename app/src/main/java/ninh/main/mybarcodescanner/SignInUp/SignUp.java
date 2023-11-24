@@ -23,7 +23,7 @@ public class SignUp extends AppCompatActivity {
     EditText tvUsernameSU, tvPasswordSU;
     Button btnSignUp , btnSignIn;
     DBSignIn DB;
-
+    // aaaaaaa
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
