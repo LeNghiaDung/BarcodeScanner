@@ -53,9 +53,10 @@ public class SignIn extends AppCompatActivity {
                         Toast.makeText(SignIn.this, "Sign In Success", Toast.LENGTH_SHORT).show();
                         Intent intent;
                         intent = new Intent(getApplicationContext(), MainActivity.class);
+                        intent.putExtra(DBSignIn.UserName,user);
                         startActivity(intent);
                     } else {
-                        Toast.makeText(SignIn.this, "Sign In Failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignIn.this, "Wrong Password", Toast.LENGTH_SHORT).show();
                     }
                 }
             }

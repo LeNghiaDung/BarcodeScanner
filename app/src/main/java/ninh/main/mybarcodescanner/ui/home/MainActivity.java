@@ -1,8 +1,11 @@
 package ninh.main.mybarcodescanner.ui.home;
 
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -16,12 +19,16 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import ninh.main.mybarcodescanner.R;
+import ninh.main.mybarcodescanner.SignInUp.DBSignIn;
 import ninh.main.mybarcodescanner.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
+    private TextView tvUsername;
+    private DBSignIn db;
+    private String user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        getUserData();
+
     }
 
     @Override
@@ -59,4 +69,36 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+    public void getUserData(){
+        Intent getIntent = getIntent();
+        user = getIntent.getStringExtra(DBSignIn.UserName);
+        db = new DBSignIn(this);
+
+        // Anh Xa
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        tvUsername = headerView.findViewById(R.id.userName);
+
+        try (Cursor data = db.getUsername(user)) {
+            if (data != null && data.moveToFirst()) {
+
+                Toast.makeText(this, "Welcome " + user, Toast.LENGTH_SHORT).show();
+
+                String name = data.getString(0);
+                tvUsername.setText(name);
+
+            } else {
+                Toast.makeText(this, "No data found", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Error retrieving data", Toast.LENGTH_SHORT).show();
+        }
+    }
 }
+
+//LAY DATE TU INTENT
+//KIEM TRA DATE CO TON TAI TREN SQLITE K?
+//SQLITE TRA VE DATA'
+// SETTEXT DATA'

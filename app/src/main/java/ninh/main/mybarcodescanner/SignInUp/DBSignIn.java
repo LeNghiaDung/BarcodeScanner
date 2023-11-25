@@ -41,7 +41,7 @@ public class DBSignIn extends SQLiteOpenHelper {
         return false;
     }
     public boolean checkUserPassword(String userName, String password){
-        SQLiteDatabase db = getWritableDatabase();
+        SQLiteDatabase db = getReadableDatabase();
         String selection = DBSignIn.UserName + " = ? AND " + DBSignIn.Password + " = ?" ;
         String[] selectionArgs = {userName,password};
         Cursor cursor = db.query(TABLE_NAME,null,selection,selectionArgs,null,null,null);
@@ -52,7 +52,7 @@ public class DBSignIn extends SQLiteOpenHelper {
         }
     }
     public boolean checkUser(String userName){
-        SQLiteDatabase db = getWritableDatabase();
+        SQLiteDatabase db = getReadableDatabase();
         String selection = DBSignIn.UserName + " = ? " ;
         String[] selectionArgs = {userName};
         Cursor cursor = db.query(TABLE_NAME,null,selection,selectionArgs,null,null,null);
@@ -61,5 +61,17 @@ public class DBSignIn extends SQLiteOpenHelper {
         }else {
             return false;
         }
+    }
+
+    public Cursor getUsername(String userName){
+        SQLiteDatabase db = getReadableDatabase();
+        String selection = DBSignIn.UserName + " = ? " ;
+        String[] selectionArgs = {userName};
+        Cursor data = db.query(TABLE_NAME,null,selection,selectionArgs,null,null,null);
+//        data.moveToFirst();
+//        if (data.getCount() > 0){
+//            return data;
+//        }
+        return data;
     }
 }
