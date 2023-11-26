@@ -23,14 +23,14 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/productImage"
+                    android:id="@+id/productImageM"
                     android:layout_width="match_parent"
                     android:layout_height="350dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/btnbackground"/>
 
                 <ImageButton
-                    android:id="@+id/btnCancel"
+                    android:id="@+id/btnCancelM"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
@@ -55,7 +55,7 @@
                 android:orientation="vertical">
 
                 <EditText
-                    android:id="@+id/productTitle"
+                    android:id="@+id/productNameM"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
@@ -63,23 +63,14 @@
                     android:textSize="25dp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/productSeri"
+                <EditText
+                    android:id="@+id/productSeriM"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:hint="Product Seri"
                     android:textSize="20dp"
                     android:textStyle="italic" />
-                <TextView
-                    android:id="@+id/tvDateAdd"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:hint="Date HH:mm - dd/MM/yyyy"
-                    android:textSize="15dp"
-                    android:textStyle="italic"
-                    tools:ignore="TextSizeCheck" />
 
             </LinearLayout>
 
@@ -97,18 +88,18 @@
                     android:orientation="horizontal">
 
                     <ImageButton
-                        android:id="@+id/btnDecrease"
+                        android:id="@+id/btnDecreaseM"
                         android:layout_width="@dimen/sizeButton"
                         android:layout_height="@dimen/sizeButton"
                         android:layout_weight="1"
                         android:background="@color/transparent"
                         android:contentDescription="Click to Remove"
-                        android:onClick="removeQuantity"
+                        android:onClick="removeQuantityM"
                         android:src="@drawable/baseline_remove_24"
                         tools:ignore="TouchTargetSizeCheck" />
 
                     <EditText
-                        android:id="@+id/productQuantity"
+                        android:id="@+id/productQuantityM"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -120,7 +111,7 @@
                         tools:ignore="TouchTargetSizeCheck" />
 
                     <ImageButton
-                        android:id="@+id/btnIncrease"
+                        android:id="@+id/btnIncreaseM"
                         android:layout_width="@dimen/sizeButton"
                         android:layout_height="@dimen/sizeButton"
                         android:layout_weight="1"
@@ -132,13 +123,13 @@
                 </LinearLayout>
 
                 <Button
-                    android:id="@+id/btnAdd"
+                    android:id="@+id/btnAddM"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/margin"
                     android:background="@drawable/btnbackground"
-                    android:onClick="addToDatabase"
+                    android:onClick="addToDatabaseM"
                     android:text="ADD TO STORAGE" />
             </LinearLayout>
         </LinearLayout>

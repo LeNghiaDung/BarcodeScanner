@@ -5,9 +5,13 @@ import androidx.fragment.app.Fragment;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -52,5 +56,31 @@ public class ListFragment extends Fragment {
             String date = data.getString(3);
             products.add(new Product(seri,name,quantity,date));
         }
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.main, menu);
+        menu.findItem(R.id.searchProduct).setVisible(false);
+        menu.findItem(R.id.sortAZ).setVisible(false);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.searchProduct:
+                Toast.makeText(getActivity(), "Search List", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.sortAZ:
+                Toast.makeText(getActivity(), "Sort AZ List", Toast.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

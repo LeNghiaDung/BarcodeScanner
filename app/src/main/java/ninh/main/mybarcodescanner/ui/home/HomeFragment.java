@@ -11,10 +11,15 @@ import android.media.ToneGenerator;
 import android.os.Bundle;
 import android.util.Size;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.OptIn;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ExperimentalGetImage;
@@ -33,6 +38,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.mlkit.vision.barcode.BarcodeScanner;
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions;
@@ -47,6 +53,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import ninh.main.mybarcodescanner.AddProduct;
+import ninh.main.mybarcodescanner.AddProductManually;
 import ninh.main.mybarcodescanner.R;
 import ninh.main.mybarcodescanner.databinding.FragmentHomeBinding;
 import ninh.main.mybarcodescanner.sqlite.DBManager;
@@ -54,6 +61,7 @@ import ninh.main.mybarcodescanner.sqlite.DatabaseHelper;
 import ninh.main.mybarcodescanner.ModifyProductActivity;
 
 public class HomeFragment extends Fragment {
+    private FloatingActionButton btnAdd;
     private ListenableFuture cameraProviderFuture;
     private ExecutorService cameraExecutor;
     private PreviewView previewView;
@@ -72,15 +80,11 @@ public class HomeFragment extends Fragment {
         //Khai bao DBManager
         dbManager = new DBManager(getActivity());
         dbManager.open();
-        dbManager.open();
-        // Activity = this / MainActivity.this
-        // Fragment = getActivity();
+
         previewView = root.findViewById(R.id.previewView);
         this.getActivity().getWindow().setFlags(1024,1024);
-
         cameraExecutor = Executors.newSingleThreadExecutor();
         cameraProviderFuture = ProcessCameraProvider.getInstance(getActivity());
-
         analyzer = new ImageAnalyzer(getActivity().getSupportFragmentManager());
 
         cameraProviderFuture.addListener(new Runnable() {
@@ -100,6 +104,15 @@ public class HomeFragment extends Fragment {
                 }
             }
         }, ContextCompat.getMainExecutor(getActivity()) );
+
+        btnAdd = root.findViewById(R.id.btnAddProductM);
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent addManually = new Intent(getActivity(), AddProductManually.class);
+                startActivity(addManually);
+            }
+        });
 
         return root;
     }
@@ -137,10 +150,6 @@ public class HomeFragment extends Fragment {
 
         processCameraProvider.bindToLifecycle(this , cameraSelector , preview , imageCapture , imageAnalysis);
     }
-
-    public void openGallery(View view) {
-    }
-
 
     public class ImageAnalyzer implements ImageAnalysis.Analyzer {
         private FragmentManager fragmentManager;
@@ -233,4 +242,31 @@ public class HomeFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.main, menu);
+        menu.findItem(R.id.searchProduct).setVisible(false);
+        menu.findItem(R.id.sortAZ).setVisible(false);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        switch (item.getItemId()){
+//            case R.id.searchProduct:
+//                Toast.makeText(getActivity(), "Search", Toast.LENGTH_SHORT).show();
+//                break;
+//            case R.id.sortAZ:
+//                Toast.makeText(getActivity(), "Sort AZ", Toast.LENGTH_SHORT).show();
+//        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

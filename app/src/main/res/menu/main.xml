@@ -2,8 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:id="@+id/sortAZ"
+        android:title="Sort A-Z"
+        android:icon="@drawable/az"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/sortQuantity"
+        android:title="Sort Quantity"
+        android:icon="@drawable/az"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/searchProduct"
+        android:title="Search"
+        android:icon="@drawable/baseline_search_24"
+        app:showAsAction="always" />
 </menu>

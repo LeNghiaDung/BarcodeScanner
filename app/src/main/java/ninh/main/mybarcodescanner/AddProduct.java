@@ -80,10 +80,7 @@ public class  AddProduct extends AppCompatActivity {
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(main);
         hideSoftKeyboard(this);
-//        Intent intent1 = new Intent(this, List.class);
-//        startActivity(intent1);
         }
-//        this.returnHome();
 
     public static void hideSoftKeyboard(Activity activity) {
         InputMethodManager inputMethodManager =
