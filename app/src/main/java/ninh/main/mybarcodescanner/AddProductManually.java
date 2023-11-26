@@ -75,4 +75,5 @@ public class AddProductManually extends AppCompatActivity {
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(home_intent);
     }
+    //Check
 }
