@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item
-        android:id="@+id/sortAZ"
-        android:title="Sort A-Z"
-        android:icon="@drawable/az"
-        app:showAsAction="never" />
+        android:id="@+id/soft"
+        android:title="Soft"
+        android:icon="@drawable/soft"
+        app:showAsAction="always" />
     <item
-        android:id="@+id/sortQuantity"
-        android:title="Sort Quantity"
-        android:icon="@drawable/az"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/searchProduct"
+        android:id="@+id/search"
         android:title="Search"
         android:icon="@drawable/baseline_search_24"
         app:showAsAction="always" />

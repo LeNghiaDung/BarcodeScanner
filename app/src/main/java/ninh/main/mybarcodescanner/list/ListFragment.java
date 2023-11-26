@@ -16,6 +16,8 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import ninh.main.mybarcodescanner.Product;
 import ninh.main.mybarcodescanner.R;
@@ -58,6 +60,7 @@ public class ListFragment extends Fragment {
         }
     }
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
@@ -65,21 +68,21 @@ public class ListFragment extends Fragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.main, menu);
-        menu.findItem(R.id.searchProduct).setVisible(false);
-        menu.findItem(R.id.sortAZ).setVisible(false);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.searchProduct:
-                Toast.makeText(getActivity(), "Search List", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.sortAZ:
-                Toast.makeText(getActivity(), "Sort AZ List", Toast.LENGTH_SHORT).show();
+        int id = item.getItemId();
+        if(id == R.id.soft){
+            Collections.sort(products, new Comparator<Product>() {
+                @Override
+                public int compare(Product o1, Product o2) {
+
+                    return o1.getNameProduct().compareToIgnoreCase(o2.getNameProduct());
+                }
+            });
+            adapter.notifyDataSetChanged();
+            Toast.makeText(getActivity(), "Soft", Toast.LENGTH_SHORT).show();
+        }
+        if(id == R.id.search){
+            Toast.makeText(getActivity(), "Search", Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
     }
