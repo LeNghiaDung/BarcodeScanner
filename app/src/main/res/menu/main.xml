@@ -3,13 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/soft"
-        android:title="Soft"
-        android:icon="@drawable/soft"
-        app:showAsAction="always" />
-    <item
-        android:id="@+id/search"
+        android:id="@+id/Search"
         android:title="Search"
         android:icon="@drawable/baseline_search_24"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/SoftQuantity"
+        android:title="Soft By Quantity"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/SoftName"
+        android:title="Soft By Name"
+        app:showAsAction="never" />
+
 </menu>

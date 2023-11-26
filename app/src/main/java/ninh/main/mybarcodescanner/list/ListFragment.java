@@ -70,7 +70,7 @@ public class ListFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.soft){
+        if(id == R.id.SoftName){
             Collections.sort(products, new Comparator<Product>() {
                 @Override
                 public int compare(Product o1, Product o2) {
@@ -81,7 +81,8 @@ public class ListFragment extends Fragment {
             adapter.notifyDataSetChanged();
             Toast.makeText(getActivity(), "Soft", Toast.LENGTH_SHORT).show();
         }
-        if(id == R.id.search){
+
+        if(id == R.id.Search){
             Toast.makeText(getActivity(), "Search", Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
