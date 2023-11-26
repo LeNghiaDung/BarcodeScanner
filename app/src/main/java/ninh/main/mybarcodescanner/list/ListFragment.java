@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -83,6 +84,19 @@ public class ListFragment extends Fragment {
         }
 
         if(id == R.id.Search){
+            SearchView searchView = (SearchView) item.getActionView();
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    adapter.getFilter().filter();
+                    return false;
+                }
+            });
             Toast.makeText(getActivity(), "Search", Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);

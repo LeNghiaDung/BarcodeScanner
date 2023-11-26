@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,7 +21,7 @@ import ninh.main.mybarcodescanner.sqlite.DBManager;
 import ninh.main.mybarcodescanner.sqlite.DatabaseHelper;
 import ninh.main.mybarcodescanner.ui.home.HomeFragment;
 
-public class ListAdapter extends BaseAdapter {
+public class ListAdapter extends BaseAdapter implements Filterable {
     Context context;
     ArrayList<Product> products;
     int layout;
@@ -44,6 +46,12 @@ public class ListAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return 0;
     }
+
+    @Override
+    public Filter getFilter() {
+        return exampleFilter;
+    }
+
     public class ViewHolder{
         ImageView imgProduct;
         TextView tvSeri, tvName, tvQuantity,tvDate;
