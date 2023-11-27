@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:id="@+id/Search"
+        android:title="Search"
+        android:icon="@drawable/baseline_search_24"
+        app:showAsAction="ifRoom|collapseActionView"
+        app:actionViewClass="android.widget.SearchView" />
+    <item
+        android:id="@+id/SoftQuantity"
+        android:title="Soft By Quantity"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/SoftName"
+        android:title="Soft By Name"
+        app:showAsAction="never" />
+
 </menu>
