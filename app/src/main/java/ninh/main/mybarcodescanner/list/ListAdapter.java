@@ -13,13 +13,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import ninh.main.mybarcodescanner.ModifyProductActivity;
 import ninh.main.mybarcodescanner.Product;
 import ninh.main.mybarcodescanner.R;
-import ninh.main.mybarcodescanner.sqlite.DBManager;
 import ninh.main.mybarcodescanner.sqlite.DatabaseHelper;
-import ninh.main.mybarcodescanner.ui.home.HomeFragment;
 
 public class ListAdapter extends BaseAdapter{
     Context context;
@@ -46,6 +45,31 @@ public class ListAdapter extends BaseAdapter{
     public long getItemId(int position) {
         return 0;
     }
+    private Filter exampleFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            ArrayList<ArrayList<Product>> filteredList = new ArrayList<>();
+
+            if(constraint == null || constraint.length() == 0){
+                filteredList.add(products);
+            }else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+                for(Product product : products){
+                    if(product.getNameProduct().toLowerCase().contains(filterPattern)){
+                        filteredList.add(products);
+                    }
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            products.clear();
+            products.addAll((Collection<? extends Product>) results.values);
+            notifyDataSetChanged();
+        }
+    };
 
     public class ViewHolder{
         ImageView imgProduct;

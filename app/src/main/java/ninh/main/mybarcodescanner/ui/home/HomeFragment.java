@@ -45,6 +45,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.mlkit.vision.barcode.BarcodeScanner;
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions;
@@ -66,6 +67,7 @@ import java.util.concurrent.Executors;
 
 
 import ninh.main.mybarcodescanner.AddProduct;
+import ninh.main.mybarcodescanner.AddProductManually;
 import ninh.main.mybarcodescanner.BarcodeProcessor;
 import ninh.main.mybarcodescanner.R;
 import ninh.main.mybarcodescanner.databinding.FragmentHomeBinding;
@@ -84,6 +86,7 @@ public class HomeFragment extends Fragment {
     public DatabaseHelper helper;
     public SQLiteDatabase database;
     ImageView btnLibr;
+    FloatingActionButton btnAdd;
     int REQUEST_FOLDER_CODE=456;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -118,6 +121,14 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        btnAdd = root.findViewById(R.id.btnAddProductM);
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AddProductManually.class);
+                startActivity(intent);
+            }
+        });
 
 
         // gọi camera

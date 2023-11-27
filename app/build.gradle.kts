@@ -70,7 +70,6 @@ dependencies {
     // If you want to additionally use the CameraX Extensions library
     implementation("androidx.camera:camera-extensions:${camerax_version}")
 
-    //thư viện zxing
     implementation("com.journeyapps:zxing-android-embedded:3.3.0")
     implementation("androidx.appcompat:appcompat:1.0.2")
 
