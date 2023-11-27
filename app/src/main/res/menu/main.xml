@@ -6,7 +6,8 @@
         android:id="@+id/Search"
         android:title="Search"
         android:icon="@drawable/baseline_search_24"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom|collapseActionView"
+        app:actionViewClass="android.widget.SearchView" />
     <item
         android:id="@+id/SoftQuantity"
         android:title="Soft By Quantity"

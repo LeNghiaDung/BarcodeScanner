@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,7 @@ import java.util.Comparator;
 import ninh.main.mybarcodescanner.Product;
 import ninh.main.mybarcodescanner.R;
 import ninh.main.mybarcodescanner.databinding.FragmentBinListBinding;
+import ninh.main.mybarcodescanner.list.ListAdapter;
 import ninh.main.mybarcodescanner.sqlite.DBManager;
 
 public class BinFragment extends Fragment {
@@ -66,8 +68,7 @@ public class BinFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.SoftName){
-            Toast.makeText(getActivity(), "Soft", Toast.LENGTH_SHORT).show();
+        if (id == R.id.SoftName) {
             Collections.sort(products, new Comparator<Product>() {
                 @Override
                 public int compare(Product o1, Product o2) {
@@ -78,11 +79,31 @@ public class BinFragment extends Fragment {
             adapter.notifyDataSetChanged();
             Toast.makeText(getActivity(), "Soft", Toast.LENGTH_SHORT).show();
         }
-        if(id == R.id.Search){
+
+        if (id == R.id.Search) {
+            SearchView searchView = (SearchView) item.getActionView();
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    ArrayList<Product> filteredProducts = new ArrayList<>();
+                    for (Product product : products) {
+                        if (product.getNameProduct().toLowerCase().contains(newText.toLowerCase())) {
+                            filteredProducts.add(product);
+                        }
+                    }
+                    adapter = new BinAdapter(getActivity(), filteredProducts, R.layout.fragment_bin_list);
+                    listView.setAdapter(adapter);
+                    return true;
+                }
+            });
             Toast.makeText(getActivity(), "Search", Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
     }
-
 
 }

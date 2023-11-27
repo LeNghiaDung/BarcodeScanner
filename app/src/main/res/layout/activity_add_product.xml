@@ -126,7 +126,7 @@
                         android:layout_weight="1"
                         android:background="@color/transparent"
                         android:contentDescription="Click to Add"
-                        android:onClick="addQuantityM"
+                        android:onClick="addQuantity"
                         android:src="@drawable/baseline_add_24"
                         tools:ignore="TouchTargetSizeCheck" />
                 </LinearLayout>

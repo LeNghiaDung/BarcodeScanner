@@ -21,7 +21,7 @@ import ninh.main.mybarcodescanner.sqlite.DBManager;
 import ninh.main.mybarcodescanner.sqlite.DatabaseHelper;
 import ninh.main.mybarcodescanner.ui.home.HomeFragment;
 
-public class ListAdapter extends BaseAdapter implements Filterable {
+public class ListAdapter extends BaseAdapter{
     Context context;
     ArrayList<Product> products;
     int layout;
@@ -45,11 +45,6 @@ public class ListAdapter extends BaseAdapter implements Filterable {
     @Override
     public long getItemId(int position) {
         return 0;
-    }
-
-    @Override
-    public Filter getFilter() {
-        return exampleFilter;
     }
 
     public class ViewHolder{

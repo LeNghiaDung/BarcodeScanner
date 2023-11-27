@@ -93,8 +93,15 @@ public class ListFragment extends Fragment {
 
                 @Override
                 public boolean onQueryTextChange(String newText) {
-                    adapter.getFilter().filter();
-                    return false;
+                    ArrayList<Product> filteredProducts = new ArrayList<>();
+                    for (Product product : products) {
+                        if (product.getNameProduct().toLowerCase().contains(newText.toLowerCase())) {
+                            filteredProducts.add(product);
+                        }
+                    }
+                    adapter = new ListAdapter(getActivity(), filteredProducts, R.layout.fragment_list_list);
+                    listView.setAdapter(adapter);
+                    return true;
                 }
             });
             Toast.makeText(getActivity(), "Search", Toast.LENGTH_SHORT).show();
