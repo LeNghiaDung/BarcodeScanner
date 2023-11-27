@@ -7,13 +7,28 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment"
     android:orientation="vertical">
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <androidx.camera.view.PreviewView
             android:id="@+id/previewView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent">
+
+
+
+        </androidx.camera.view.PreviewView>
+
+        <ImageButton
+            android:id="@+id/gallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center|top"
+            android:background="@drawable/galeyy" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -22,6 +37,7 @@
                 android:id="@+id/scanZone"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
+                android:layout_gravity="center|top"
                 android:layout_centerInParent="true"
                 android:background="@drawable/shape_zone" />
         </RelativeLayout>

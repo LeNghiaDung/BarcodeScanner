@@ -1,25 +1,37 @@
 package ninh.main.mybarcodescanner.ui.home;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.Manifest;
+import android.content.ContentResolver;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.ImageFormat;
 import android.graphics.Rect;
 import android.media.AudioManager;
 import android.media.Image;
 import android.media.ToneGenerator;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Size;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.OptIn;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ExperimentalGetImage;
 import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.ImageCapture;
+import androidx.camera.core.ImageInfo;
 import androidx.camera.core.ImageProxy;
 import androidx.camera.core.Preview;
 import androidx.camera.lifecycle.ProcessCameraProvider;
@@ -40,13 +52,21 @@ import com.google.mlkit.vision.barcode.BarcodeScanning;
 import com.google.mlkit.vision.barcode.common.Barcode;
 import com.google.mlkit.vision.common.InputImage;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.nio.ByteBuffer;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+
+
 import ninh.main.mybarcodescanner.AddProduct;
+import ninh.main.mybarcodescanner.BarcodeProcessor;
 import ninh.main.mybarcodescanner.R;
 import ninh.main.mybarcodescanner.databinding.FragmentHomeBinding;
 import ninh.main.mybarcodescanner.sqlite.DBManager;
@@ -63,16 +83,19 @@ public class HomeFragment extends Fragment {
     private DBManager dbManager;
     public DatabaseHelper helper;
     public SQLiteDatabase database;
+    ImageView btnLibr;
+    int REQUEST_FOLDER_CODE=456;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        //Khai bao DBManager
+        //KHAI BÁO DATABASE
         dbManager = new DBManager(getActivity());
         dbManager.open();
         dbManager.open();
+
         // Activity = this / MainActivity.this
         // Fragment = getActivity();
         previewView = root.findViewById(R.id.previewView);
@@ -83,6 +106,21 @@ public class HomeFragment extends Fragment {
 
         analyzer = new ImageAnalyzer(getActivity().getSupportFragmentManager());
 
+        //ánh xạ nút Thư viện để truy cập vào ảnh
+
+        btnLibr=root.findViewById(R.id.gallery);
+        btnLibr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent,REQUEST_FOLDER_CODE);
+            }
+        });
+
+
+
+        // gọi camera
         cameraProviderFuture.addListener(new Runnable() {
             @Override
             public void run() {
@@ -104,6 +142,7 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
+    //yêu cầu cấp quyền cho camera
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -120,6 +159,7 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    //hàm y/c các tác vụ của camera
     private void bindpreview(ProcessCameraProvider processCameraProvider) {
         Preview preview = new Preview.Builder().build();
 
@@ -138,10 +178,49 @@ public class HomeFragment extends Fragment {
         processCameraProvider.bindToLifecycle(this , cameraSelector , preview , imageCapture , imageAnalysis);
     }
 
-    public void openGallery(View view) {
+
+
+    //Lấy ảnh + xử lí ảnh
+       @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent intent) {
+        /////////////////////////////// LIBRARY
+        if (requestCode == REQUEST_FOLDER_CODE && resultCode == RESULT_OK && intent != null) {
+            Uri uri = intent.getData();
+            try {
+
+                InputStream inputStream = getContext().getContentResolver().openInputStream(uri);
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                String barcodeResult = BarcodeProcessor.decodeBarcode(bitmap);
+                if (barcodeResult != null) {
+                    ////////// Xử lý mã vạch ở đây (cho vào database)
+                    if(dbManager.checkExisted(barcodeResult)==true)
+                    {
+                        barcodeResult = barcodeResult +" ";
+                        Intent productIntent = new Intent(getActivity(), ModifyProductActivity.class);
+                        productIntent.putExtra(DatabaseHelper.Seri,barcodeResult);
+                        startActivity(productIntent);
+                    }
+                    else {
+                        Intent productIntent = new Intent(getActivity(), AddProduct.class);
+                        productIntent.putExtra(DatabaseHelper.Seri,barcodeResult);
+                        startActivity(productIntent);
+
+                    }
+                    Toast.makeText(getActivity(), "Mã vạch: " + barcodeResult, Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(getActivity(), "Không thể đọc mã vạch từ ảnh", Toast.LENGTH_SHORT).show();
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            super.onActivityResult(requestCode, resultCode, intent);
+        }
     }
 
 
+
+    //cho vào arraylist
     public class ImageAnalyzer implements ImageAnalysis.Analyzer {
         private FragmentManager fragmentManager;
 
@@ -149,6 +228,7 @@ public class HomeFragment extends Fragment {
             this.fragmentManager = fragmentManager;
         }
 
+        //cho mã vào array
         @Override
         public void analyze(@NonNull ImageProxy image) {
             scanbarcode(image);

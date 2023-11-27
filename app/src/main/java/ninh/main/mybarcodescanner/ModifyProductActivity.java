@@ -36,6 +36,7 @@ public class ModifyProductActivity extends Activity{
     String name;
     int quantity = 0;
     String date;
+    String serigui;
 
 
     @Override
@@ -52,6 +53,8 @@ public class ModifyProductActivity extends Activity{
         seri = intent.getStringExtra(DatabaseHelper.Seri);
         seriText.setText(seri);
         getData();
+
+
     }
     private void init(){
         seriText = findViewById(R.id.seri_edittext);

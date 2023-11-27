@@ -1,5 +1,7 @@
 package ninh.main.mybarcodescanner;
 
+import java.util.Calendar;
+
 public class Product {
     private String seri;
     private String nameProduct;

@@ -6,6 +6,7 @@ android {
     namespace = "ninh.main.mybarcodescanner"
     compileSdk = 34
 
+
     defaultConfig {
         applicationId = "ninh.main.mybarcodescanner"
         minSdk = 24
@@ -30,6 +31,12 @@ android {
         viewBinding = true
     }
 }
+
+
+android {
+    buildToolsVersion = "28.0.3" // Older versions may give compile errors
+   }
+
 
 dependencies {
 
@@ -63,5 +70,11 @@ dependencies {
     // If you want to additionally use the CameraX Extensions library
     implementation("androidx.camera:camera-extensions:${camerax_version}")
 
+    //thư viện zxing
+    implementation("com.journeyapps:zxing-android-embedded:3.3.0")
+    implementation("androidx.appcompat:appcompat:1.0.2")
 
 }
+
+
+
