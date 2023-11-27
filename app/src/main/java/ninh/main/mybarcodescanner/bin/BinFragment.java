@@ -90,13 +90,13 @@ public class BinFragment extends Fragment {
 
                 @Override
                 public boolean onQueryTextChange(String newText) {
-                    ArrayList<Product> filteredProducts = new ArrayList<>();
+                    ArrayList<Product> filteredProducts1 = new ArrayList<>();
                     for (Product product : products) {
                         if (product.getNameProduct().toLowerCase().contains(newText.toLowerCase())) {
-                            filteredProducts.add(product);
+                            filteredProducts1.add(product);
                         }
                     }
-                    adapter = new BinAdapter(getActivity(), filteredProducts, R.layout.fragment_bin_list);
+                    adapter = new BinAdapter(getActivity(), filteredProducts1, R.layout.fragment_bin_list);
                     listView.setAdapter(adapter);
                     return true;
                 }
